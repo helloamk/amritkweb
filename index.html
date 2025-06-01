@@ -1,0 +1,1159 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chemical Engineering notes | Amrit Khanal</title>
+    <meta name="description"
+        content="Your #1 hub for Chemical Engineering in Nepal! Access IOE notes, syllabus, past questions for Pulchowk Campus (B.Tech) and read insightful blogs by Amrit Khanal.">
+
+    <!-- Author -->
+    <meta name="author" content="Amrit Khanal">
+    <meta name="keywords" content="
+        Amrit Khanal, Chemical Engineering Nepal, Pulchowk Campus Chemical Engineering, IOE Chemical Engineering Notes,
+        Chemical Engineering Blogs Nepal, B.Tech Chemical Engineering Nepal, IOE Syllabus Chemical,
+        Chemical Engineering Past Question, Engineering Notes Nepal, Pulchowk Engineering Study Materials,
+        BCHNOTES, IOE Entrance Preparation, Amrit Khanal IOE, amritk.com.np
+    ">
+    <!-- ****** FAVICON ****** -->
+    <link rel="icon" href="Images/Amrit_Khanal_icon1.png" type="image/png">
+    <link rel="apple-touch-icon" href="Images/Amrit Khanal icon1.png" sizes="180x180">
+    <!-- ****** OPEN GRAPH (OG) TAGS - For Social Media Sharing ****** -->
+    <meta property="og:title" content="Chemical Engineering notes | Amrit Khanal">
+    <meta property="og:description"
+        content="The ultimate source for Chemical Engineering notes, syllabus, past questions (Pulchowk Campus, IOE B.Tech) & insightful blogs in Nepal.">
+    <meta property="og:image" content="https://www.amritk.com.np/amrit-logo-adobe.png">
+    <meta property="og:url" content="https://www.amritk.com.np/">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="en_NP">
+    <meta property="og:site_name" content="Amrit Khanal | Chemical Engineering Nepal">
+
+    <!-- ****** TWITTER CARD TAGS - For Twitter Sharing ****** -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="IOE Chemical Engineering Notes | Amrit Khanal">
+    <meta name="twitter:description"
+        content="Your go-to hub for Chemical Engineering notes, syllabus, study materials (Pulchowk, IOE B.Tech), and engaging blogs in Nepal.">
+    <meta name="twitter:image" content="https://www.amritk.com.np/amrit-logo-adobe.png">
+    <meta name="twitter:url" content="https://www.amritk.com.np/">
+
+    <!-- ****** CANONICAL TAG - Important for duplicate content ****** -->
+    <link rel="canonical" href="https://www.amritk.com.np/">
+    <!-- IMPORTANT: This should be the definitive URL of THIS page -->
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="styles.css"> <!-- Ensure this path is correct -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- ****** STRUCTURED DATA (SCHEMA.ORG) - Highly Recommended ****** -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Amrit Khanal | Chemical Engineering Nepal",
+      "url": "https://www.amritk.com.np/",
+      "description": "Your #1 hub for Chemical Engineering in Nepal! Access IOE notes, syllabus, past questions for Pulchowk Campus (B.Tech) and read insightful blogs by Amrit Khanal.",
+      "author": {
+        "@type": "Person",
+        "name": "Amrit Khanal"
+      },
+      "publisher": {
+        "@type": "Person",
+        "name": "Amrit Khanal"
+      },
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "https://www.amritk.com.np/search?q={search_term_string}"
+        },
+        "query-input": "required name=search_term_string"
+      },
+      "inLanguage": "en-US" // Or "en-NP" if content is specifically Nepali English
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Amrit Khanal",
+      "url": "https://www.amritk.com.np/", // Link to your main profile page or homepage
+      "jobTitle": "Chemical Engineer",
+      "alumniOf": {
+        "@type": "CollegeOrUniversity",
+        "name": "Pulchowk Campus, Institute of Engineering (IOE)"
+      },
+      "knowsAbout": ["Chemical Engineering", "IOE Syllabus", "Engineering Notes", "Pulchowk Campus"],
+      "sameAs": [
+        "https://www.linkedin.com/in/amritk-com-np/",
+        "https://www.facebook.com/amritk.com.np/",
+        "https://instagram.com/amritk.com.np"
+      ]
+    }
+    </script>
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <a href="/">
+            <div class="logo">
+                <img src="Images/amrit-logo-adobe.png" alt="Amrit Khanal Logo" class="logo-img">
+            </div>
+        </a>
+        <nav id="navbar">
+            <ul>
+                <li><a href="#home" class="active">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#educational-content">Educational Content</a></li>
+                <li><a href="#blogs">My Blog</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="menu-toggle">
+            <i class="fas fa-bars"></i>
+        </div>
+        <div class="theme-toggle">
+            <i class="fas fa-sun"></i>
+            <i class="fas fa-moon"></i>
+        </div>
+
+    </header>
+
+    <section id="home" class="hero">
+        <!-- Canvas for particle animation -->
+        <canvas id="particle-canvas"></canvas>
+
+        <div class="hero-content container">
+            <div class="hero-text-column">
+                <h2>Welcome To My Website</h2>
+                <h1>I'm Amrit Khanal</h1>
+                <h3>Chemical Engineer</h3>
+                <p class="hero-tagline">Sharing knowledge and resources in chemical engineering</p>
+                <div class="hero-buttons">
+                    <a href="#about" class="btn primary-btn">Learn More</a>
+                    <a href="#educational-content" class="btn secondary-btn">Educational Content</a>
+                    <a href="#blogs" class="btn secondary-btn">Read My Blogs</a>
+                </div>
+            </div>
+            <div class="profile-image"> <!-- This container is key for its positioning -->
+                <img src="Images/amrit-profile.png" alt="Amrit Khanal - Chemical Engineer" class="profile-img">
+            </div>
+        </div>
+        <div class="scroll-down">
+            <a href="#about"><i class="fas fa-chevron-down"></i></a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title">About Me</h2>
+            <div class="about-content">
+                <div class="main-content">
+                    <div class="bio-text">
+
+                        <h3>Who I Am</h3>
+                        <p>I am <strong>Amrit Khanal,</strong> a Chemical Engineer from IOE Pulchowk Campus, born in
+                            Malarani-4, Khana,
+                            <strong>Arghakhanchi</strong>, Nepal. I am deeply committed to applying chemical engineering
+                            principles and
+                            machine learning to address critical environmental challenges, with a strong focus on
+                            wastewater treatment, sustainable process design, and optimization.
+                        </p>
+                        <p>My mission is to bridge the gap between traditional engineering and modern computational
+                            methods to develop innovative, eco-friendly solutions for real-world problems. I aim to
+                            contribute meaningfully to clean energy, resource recovery, and environmental protection in
+                            Nepal and beyond.</p>
+                        <p>With a robust foundation in engineering from IOE Pulchowk Campus and expertise in data-driven
+                            technologies, I am constantly exploring interdisciplinary approaches to enhance the
+                            efficiency, sustainability, and social impact of industrial processes.</p>
+
+                    </div>
+                    <div class="typewriter-code">
+                        <span><span class="keyword">from</span> chemeng_misery <span class="keyword">import</span>
+                            distillation_tower, reboiler_scream, condenser_panic, tray_failure</span>
+                        <span><span class="keyword">from</span> tensorflow.keras.models <span
+                                class="keyword">import</span> Sequential</span>
+                        <span><span class="keyword">from</span> tensorflow.keras.layers <span
+                                class="keyword">import</span> Dense, Dropout</span>
+                        <span>frac_tower = <span class="function">Sequential</span>()</span> <span><span
+                                class="comment"># My last shot before the unemployment line</span></span>
+                        <span>frac_tower.<span class="function">add</span>(<span class="function">Dense</span>(300,
+                            <span class="string">activation</span>=<span class="string">'relu'</span>))</span>
+                        <span>frac_tower.<span class="function">add</span>(<span
+                                class="function">Dropout</span>(0.6))</span> <span><span class="comment"># 60% of my
+                                trays are weeping</span></span>
+                        <span>frac_tower.<span class="function">add</span>(<span class="function">Dense</span>(50, <span
+                                class="string">activation</span>=<span class="string">'sigmoid'</span>))</span>
+                        <span><span class="function">reboiler_scream</span>(<span
+                                class="string">temperature</span>=<span class="number">500</span>)</span> <span><span
+                                class="comment"># Overheating, like my stress levels</span></span>
+                        <span><span class="function">condenser_panic</span>(<span
+                                class="string">coolant_flow</span>=<span class="number">0.1</span>)</span>
+                        <span><span class="function">tray_failure</span>(<span class="string">efficiency</span>=<span
+                                class="number">0.01</span>)</span>
+                        <span>frac_tower.<span class="function">compile</span>(optimizer=<span
+                                class="string">'sgd'</span>)</span>
+                        <span><span class="function">distillation_tower</span>(frac_tower)</span>
+                        <span><span class="function">print</span>(<span class="string">"DISTILLATION DISASTER: 99.5%
+                                ethanol, 500% ChemE tears"</span>)</span>
+                    </div>
+
+
+
+                    <div class="distillation-column-wrapper">
+                        <div class="distillation-diagram-container">
+                            <!-- Labels -->
+                            <div class="label" style="left: 260px; top: 30px;">Condenser</div>
+                            <div class="label" style="right: 110px; top: 100px;">Reflux Drum</div>
+                            <div class="label" style="left: 50px; top: 245px;">Feed</div>
+                            <div class="label" style="left: 250px; top: 135px;">Reflux</div>
+                            <div class="label" style="right: 20px; top: 145px;">Distillate</div>
+                            <div class="label" style="left: 280px; top: 410px;">Reboiler</div>
+                            <div class="label" style="left: 30px; top: 458px;">Bottom</div>
+
+                            <!-- Distillation Column -->
+                            <div class="column">
+                                <div class="tray" style="top: 17%;"></div>
+                                <div class="tray" style="top: 31%;"></div>
+                                <div class="tray" style="top: 45%;"></div>
+                                <div class="tray" style="top: 59%;"></div>
+                                <div class="tray" style="top: 73%;"></div>
+                                <div class="internal-arrow liquid-arrow down" style="top: 12%; left: 25%;"></div>
+                                <div class="internal-arrow liquid-arrow down" style="top: 26%; left: 25%;"></div>
+                                <div class="internal-arrow liquid-arrow down" style="top: 40%; left: 25%;"></div>
+                                <div class="internal-arrow liquid-arrow down" style="top: 54%; left: 25%;"></div>
+                                <div class="internal-arrow liquid-arrow down" style="top: 68%; left: 25%;"></div>
+                                <div class="internal-arrow liquid-arrow down" style="top: 82%; left: 25%;"></div>
+                                <div class="internal-arrow vapor-arrow up" style="top: 10%; right: 25%;"></div>
+                                <div class="internal-arrow vapor-arrow up" style="top: 24%; right: 25%;"></div>
+                                <div class="internal-arrow vapor-arrow up" style="top: 38%; right: 25%;"></div>
+                                <div class="internal-arrow vapor-arrow up" style="top: 52%; right: 25%;"></div>
+                                <div class="internal-arrow vapor-arrow up" style="top: 66%; right: 25%;"></div>
+                                <div class="internal-arrow vapor-arrow up" style="top: 80%; right: 25%;"></div>
+                            </div>
+
+                            <!-- Condenser -->
+                            <div class="condenser-symbol">
+                                <div class="condenser-circle"></div>
+                                <div class="condenser-zigzag-path">
+                                    <div class="cz-segment"
+                                        style="width: 10px; transform: rotate(60deg); top: 0px; left: 0px;"></div>
+                                    <div class="cz-segment"
+                                        style="width: 10px; transform: rotate(-60deg); top: 8.66px; left: 5px;"></div>
+                                    <div class="cz-segment"
+                                        style="width: 10px; transform: rotate(60deg); top: 0px; left: 10px;"></div>
+                                    <div class="cz-segment"
+                                        style="width: 10px; transform: rotate(-60deg); top: 8.66px; left: 15px;"></div>
+                                </div>
+                                <div class="condenser-arrow-diag"></div>
+                                <div class="condenser-arrow-diag-head"></div>
+                            </div>
+
+                            <!-- Reflux Drum -->
+                            <div class="reflux-drum">
+                                <div class="liquid-base"></div>
+                                <div class="liquid-hump hump1"></div>
+                                <div class="liquid-hump hump2"></div>
+                            </div>
+
+                            <!-- Reboiler -->
+                            <div class="reboiler">
+                                <div class="reboiler-liquid-base"></div>
+                                <div class="heating-coil">
+                                    <div class="hc-tube" style="top: 5px; width: calc(100% - 20px);"></div>
+                                    <div class="hc-u-bend" style="top: 5px;"></div>
+                                    <div class="hc-tube" style="top: 15px; width: calc(100% - 20px);"></div>
+                                    <div class="hc-u-bend" style="top: 15px;"></div>
+                                    <div class="hc-tube" style="top: 25px; width: calc(100% - 20px);"></div>
+                                    <div class="hc-u-bend" style="top: 25px;"></div>
+                                </div>
+                                <div class="bubble" style="left: 20%; animation-delay: 0s;"></div>
+                                <div class="bubble" style="left: 35%; animation-delay: 0.8s;"></div>
+                                <div class="bubble" style="left: 50%; animation-delay: 0.3s;"></div>
+                                <div class="bubble" style="left: 65%; animation-delay: 1.2s;"></div>
+                                <div class="bubble" style="left: 80%; animation-delay: 0.6s;"></div>
+                            </div>
+
+                            <!-- Pipes -->
+                            <div class="pipe liquid-pipe animated-flow"
+                                style="width: 60px; height: 4px; left: 90px; top: 250px;"></div>
+                            <div class="arrow liquid-arrow arrow-right" style="left: 145px; top: 248px;"></div>
+                            <div class="pipe vapor-pipe animated-flow vertical"
+                                style="width: 4px; height: 40px; left: 188px; top: 62px;"></div>
+                            <div class="pipe vapor-pipe animated-flow"
+                                style="width: 92px; height: 4px; left: 188px; top: 60px;"></div>
+                            <div class="arrow vapor-arrow arrow-up" style="left: 186px; top: 97px;"></div>
+                            <div class="arrow vapor-arrow arrow-right" style="left: 275px; top: 58px;"></div>
+                            <div class="pipe liquid-pipe animated-flow vertical"
+                                style="width: 4px; height: 35px; left: 338px; top: 90px;"></div>
+                            <div class="pipe liquid-pipe animated-flow"
+                                style="width: 65px; height: 4px; left: 338px; top: 123px;"></div>
+                            <div class="arrow liquid-arrow arrow-down" style="left: 336px; top: 85px;"></div>
+                            <div class="arrow liquid-arrow arrow-right" style="left: 398px; top: 121px;"></div>
+                            <div class="pipe liquid-pipe animated-flow"
+                                style="width: 170px; height: 4px; left: 230px; top: 158px;"></div>
+                            <div class="arrow liquid-arrow arrow-left" style="left: 230px; top: 156px;"></div>
+                            <div class="arrow liquid-arrow arrow-down" style="left: 420px; top: 150px;"></div>
+                            <div class="pipe liquid-pipe animated-flow"
+                                style="width: 80px; height: 4px; left: 520px; top: 150px;"></div>
+                            <div class="arrow liquid-arrow arrow-right" style="left: 595px; top: 148px;"></div>
+                            <div class="pipe liquid-pipe animated-flow vertical"
+                                style="width: 4px; height: 65px; left: 188px; top: 400px;"></div>
+                            <div class="pipe liquid-pipe animated-flow"
+                                style="width: 65px; height: 4px; left: 188px; top: 463px;"></div>
+                            <div class="arrow liquid-arrow arrow-down" style="left: 186px; top: 395px;"></div>
+                            <div class="arrow liquid-arrow arrow-right" style="left: 248px; top: 461px;"></div>
+                            <div class="pipe vapor-pipe animated-flow vertical"
+                                style="width: 4px; height: 80px; left: 248px; top: 352px;"></div>
+                            <div class="pipe vapor-pipe animated-flow"
+                                style="width: 20px; height: 4px; left: 230px; top: 350px;"></div>
+                            <div class="arrow vapor-arrow arrow-up" style="left: 246px; top: 427px;"></div>
+                            <div class="arrow vapor-arrow arrow-left" style="left: 230px; top: 348px;"></div>
+                            <div class="pipe liquid-pipe animated-flow"
+                                style="width: 100px; height: 4px; left: 90px; top: 463px;"></div>
+                            <div class="arrow liquid-arrow arrow-left" style="left: 90px; top: 461px;"></div>
+                            <div class="reboiler-heat-inlet"></div>
+                            <div class="reboiler-heat-inlet-arrow"></div>
+                            <div class="reboiler-heat-outlet"></div>
+                            <div class="reboiler-heat-outlet-arrow"></div>
+                            <div class="legend">
+                                <div class="legend-item">
+                                    <span class="color-box vapor"></span> Vapour Flow
+                                </div>
+                                <div class="legend-item">
+                                    <span class="color-box liquid"></span> Liquid Flow
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="diagram-note">
+                        Note: The above animated diagram is a simplified representation of a
+                        <span class="highlight">distillation column</span>.
+                        And completely made by Using
+                        <span class="highlight">Html</span> and
+                        <span class="highlight">css</span> only.
+                    </p>
+                </div>
+                <div class="sidebar">
+                    <div class="education">
+                        <div class="edu-item">
+                            <span class="edu-icon">🎓</span>
+                            <div>
+                                <strong>2021 - 2025</strong>
+                                <p>B.E. Chemical Engineering. <br>Pulchowk Campus, Institute of Engineering, Tribhuvan
+                                    University</p>
+                            </div>
+                        </div>
+                        <div class="edu-item">
+                            <span class="edu-icon">📊</span>
+                            <div>
+                                <strong>2023</strong>
+                                <p>Research<br>Water Quality Analysis Project, Department of Applied Sciences and
+                                    Chemical Engineering</p>
+                            </div>
+                        </div>
+                        <div class="edu-item">
+                            <span class="edu-icon">🤖</span>
+                            <div>
+                                <strong>2024</strong>
+                                <p>Machine Learning Project<br>Wastewater Parameter Prediction Using RNN, AI Research
+                                    Lab</p>
+                            </div>
+                        </div>
+                        <div class="edu-item">
+                            <span class="edu-icon"><i class="fas fa-briefcase"></i></span>
+                            <div>
+                                <strong>2024</strong>
+                                <p>Internship<br>Nepal Oil Corporation</p>
+                            </div>
+                        </div>
+                        <div class="edu-item">
+                            <span class="edu-icon">🔍</span>
+                            <div>
+                                <h3>Key Projects</h3>
+                                <p>
+                                    <strong>Water Quality Analysis, Kathmandu Valley</strong>
+                                    <b><i>To: Ministry of Water Supply and Sanitation</i></b><br>
+                                    Analyzed pH, BOD, and turbidity to inform water management policies.
+                                </p>
+                                <p>
+                                    <strong>Chemical Risk Mitigation</strong> (2023)<br>
+                                    <b><i>To: Ministry of Home Affairs</i></b><br>
+                                    Developed safety protocols for chemical handling and emergency response.
+                                </p>
+                                <p>
+                                    <strong>Machine Learning Project</strong> (2024)<br>
+                                    <b><i>Final Year Project</i></b><br>
+                                    Built an RNN model to predict wastewater parameters at Guheshwari WWTP.
+                                </p>
+                                <p>
+                                    <strong>Herbal Extraction Research</strong> (running research)<br>
+                                    Exploring eco-friendly extraction of bioactive compounds from herbs.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="edu-item skills-item">
+                            <span class="edu-icon">💻</span>
+                            <div>
+                                <h3>Technical Skills</h3>
+                                <div class="skills-overview">
+                                    <ul class="skills-logo-list">
+                                        <li><img src="Images/python logo.png" alt="Python" title="Python"></li>
+                                        <li><img src="Images/MATLAB-logo.png" alt="Matlab" title="Matlab"></li>
+                                        <li><img src="Images/ms-office.png" alt="MS Office Suite" title="MS Office">
+                                        </li>
+                                        <li><img src="Images/latex-logo.png" alt="LaTex" title="LaTex"></li>
+                                        <li><img src="Images/machine-learning.png" alt="machine-learning"
+                                                title="Machine Learning">
+                                        </li>
+                                        <li><img src="Images/aspen-plus-logo.png" alt="Aspen Plus" title="Aspen Plus">
+                                        </li>
+                                        <li><img src="Images/excel-logo.png" alt="Excel" title="Excel"></li>
+                                        <li><img src="Images/autocad-plant-3d.png" alt="AutoCad-Plant-3d"
+                                                title="AutoCad-Plant-3d">
+                                        </li>
+                                        <li><img src="Images/DWSIM.png" alt="DWSIM" title="DWSIM" width="75"
+                                                height="50"></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
+
+    <!-- Educational Content Section -->
+    <section id="educational-content" class="educational-content">
+        <div class="container">
+            <h2 class="section-title">Educational Content</h2>
+
+            <div class="content-categories">
+                <div class="category-item" data-category="important-books">
+                    <div class="folder-icon">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <h3>Important Books</h3>
+                    <div class="folder-arrow">
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                </div>
+
+                <div class="category-item" data-category="semester-material">
+                    <div class="folder-icon">
+                        <i class="fas fa-folder"></i>
+                    </div>
+                    <h3>Semester Material</h3>
+                    <div class="folder-arrow">
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                </div>
+
+                <div class="category-item" data-category="python">
+                    <div class="folder-icon">
+                        <i class="fab fa-python"></i>
+                    </div>
+                    <h3>Python</h3>
+                    <div class="folder-arrow">
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                </div>
+
+                <div class="category-item" data-category="aspen">
+                    <div class="folder-icon">
+                        <span class="text-icon">A+</span>
+                    </div>
+                    <h3>Aspen</h3>
+                    <div class="folder-arrow">
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                </div>
+
+                <div class="category-item" data-category="matlab">
+                    <div class="folder-icon">
+                        <span class="text-icon">M</span>
+                    </div>
+                    <h3>MATLAB</h3>
+                    <div class="folder-arrow">
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                </div>
+
+                <div class="category-item" data-category="autocad">
+                    <div class="folder-icon">
+                        <i class="fas fa-drafting-compass"></i>
+                    </div>
+                    <h3>AutoCAD Plant 3D</h3>
+                    <div class="folder-arrow">
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                </div>
+
+                <div class="category-item" data-category="solidworks">
+                    <div class="folder-icon">
+                        <i class="fas fa-cube"></i>
+                    </div>
+                    <h3>SolidWorks</h3>
+                    <div class="folder-arrow">
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                </div>
+
+                <div class="category-item" data-category="polymath">
+                    <div class="folder-icon">
+                        <i class="fas fa-calculator"></i>
+                    </div>
+                    <h3>Polymath</h3>
+                    <div class="folder-arrow">
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Content Display Area -->
+            <div id="content-display-area" class="content-display-area">
+                <div class="content-placeholder">
+                    <i class="fas fa-folder-open"></i>
+                    <p>Click on a folder above to view its contents</p>
+                </div>
+
+                <!-- Content Sections -->
+                <div id="content-display">
+                    <!-- Important Books Section -->
+                    <div id="important-books" class="content-section">
+                        <h2>Important Books in Chemical Engineering</h2>
+
+                        <div class="book-grid">
+                            <div class="book-item">
+                                <h3>Chemical Process Calculation</h3>
+                                <div class="book-links">
+                                    <a href="https://drive.google.com/file/d/1lu54oL0rAUbTnqsDvNrDW0Qqw5YVMblL/view?usp=sharing"
+                                        target="_blank" class="btn view-btn">
+                                        <i class="fas fa-eye"></i> View
+                                    </a>
+                                    <a href="https://drive.google.com/uc?export=download&id=1lu54oL0rAUbTnqsDvNrDW0Qqw5YVMblL"
+                                        class="btn download-btn">
+                                        <i class="fas fa-download"></i> Download
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="book-item">
+                                <h3>Fluid Mechanics</h3>
+                                <div class="book-links">
+                                    <a href="https://drive.google.com/file/d/15CMVwyJ1vjC-tgojMQIA3z3vPcCdSfSB/preview"
+                                        target="_blank" class="btn view-btn">
+                                        <i class="fas fa-eye"></i> View
+                                    </a>
+                                    <a href="https://drive.google.com/uc?export=download&id=15CMVwyJ1vjC-tgojMQIA3z3vPcCdSfSB"
+                                        class="btn download-btn">
+                                        <i class="fas fa-download"></i> Download
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="book-item">
+                                <h3>Chemical Engineering Thermodynamics</h3>
+                                <div class="book-links">
+                                    <a href="https://drive.google.com/file/d/19r5VwCULqrR7QLhCqDOQCZLTLhNdsyv4/preview"
+                                        target="_blank" class="btn view-btn">
+                                        <i class="fas fa-eye"></i> View
+                                    </a>
+                                    <a href="https://drive.google.com/uc?export=download&id=19_4C1q0bnF8wKBuYUn5uDvH5Q0hKMnrZ"
+                                        class="btn download-btn">
+                                        <i class="fas fa-download"></i> Download
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="book-item">
+                                <h3>Mass Transfer</h3>
+                                <div class="book-links">
+                                    <a href="https://drive.google.com/file/d/1mZl4pO53_r8l_1kmlVk1ZewtpUzUj9EO/preview"
+                                        target="_blank" class="btn view-btn">
+                                        <i class="fas fa-eye"></i> View
+                                    </a>
+                                    <a href="https://drive.google.com/uc?export=download&id=1mZl4pO53_r8l_1kmlVk1ZewtpUzUj9EO"
+                                        class="btn download-btn">
+                                        <i class="fas fa-download"></i> Download
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="book-item">
+                                <h3>Heat Transfer</h3>
+                                <div class="book-links">
+                                    <a href="https://drive.google.com/file/d/1Fr1M5wCtGwmSNXy51E4XSFG9Huetq0mu/preview"
+                                        target="_blank" class="btn view-btn">
+                                        <i class="fas fa-eye"></i> View
+                                    </a>
+                                    <a href="https://drive.google.com/uc?export=download&id=1Fr1M5wCtGwmSNXy51E4XSFG9Huetq0mu"
+                                        class="btn download-btn">
+                                        <i class="fas fa-download"></i> Download
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="book-item">
+                                <h3>Chemical Reaction Engineering</h3>
+                                <div class="book-links">
+                                    <a href="https://drive.google.com/file/d/1Foqz7qZGekEniVNhtWtv4volwCGywhfC/preview"
+                                        target="_blank" class="btn view-btn">
+                                        <i class="fas fa-eye"></i> View
+                                    </a>
+                                    <a href="https://drive.google.com/uc?export=download&id=1Foqz7qZGekEniVNhtWtv4volwCGywhfC"
+                                        class="btn download-btn">
+                                        <i class="fas fa-download"></i> Download
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="book-item">
+                                <h3>Chemical Engineering Design</h3>
+                                <div class="book-links">
+                                    <a href="https://drive.google.com/file/d/1JHN57IltWc4jE7c-bLQ_toNL5AAvcE27/preview"
+                                        target="_blank" class="btn view-btn">
+                                        <i class="fas fa-eye"></i> View
+                                    </a>
+                                    <a href="https://drive.google.com/uc?export=download&id=1JHN57IltWc4jE7c-bLQ_toNL5AAvcE27"
+                                        class="btn download-btn">
+                                        <i class="fas fa-download"></i> Download
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="book-item">
+                                <h3>Unit Operation</h3>
+                                <div class="book-links">
+                                    <a href="https://drive.google.com/file/d/1et4cDLch-lhG69MkS3pWfpqHBTvitjb2/preview"
+                                        target="_blank" class="btn view-btn">
+                                        <i class="fas fa-eye"></i> View
+                                    </a>
+                                    <a href="https://drive.google.com/uc?export=download&id=1et4cDLch-lhG69MkS3pWfpqHBTvitjb2"
+                                        class="btn download-btn">
+                                        <i class="fas fa-download"></i> Download
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="book-item">
+                                <h3>Instrumentation and Process Control</h3>
+                                <div class="book-links">
+                                    <a href="https://drive.google.com/file/d/1EXMyxBTSzxOQR3NW1cPcXEh4Sct5khkd/preview"
+                                        target="_blank" class="btn view-btn">
+                                        <i class="fas fa-eye"></i> View
+                                    </a>
+                                    <a href="https://drive.google.com/uc?export=download&id=1EXMyxBTSzxOQR3NW1cPcXEh4Sct5khkd"
+                                        class="btn download-btn">
+                                        <i class="fas fa-download"></i> Download
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="book-item">
+                                <h3>Chemical Equipment Design</h3>
+                                <div class="book-links">
+                                    <a href="https://drive.google.com/file/d/1saYt79S-H7um33300VXeotewchB-NHuD/preview"
+                                        target="_blank" class="btn view-btn">
+                                        <i class="fas fa-eye"></i> View
+                                    </a>
+                                    <a href="https://drive.google.com/uc?export=download&id=1saYt79S-H7um33300VXeotewchB-NHuD"
+                                        class="btn download-btn">
+                                        <i class="fas fa-download"></i> Download
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="book-item">
+                                <h3>Welded Tank for Oil Storage</h3>
+                                <div class="book-links">
+                                    <a href="https://drive.google.com/file/d/1v3p4C4M8PZrJLovjXV7DrTP4jcxp-wyL/preview"
+                                        target="_blank" class="btn view-btn">
+                                        <i class="fas fa-eye"></i> View
+                                    </a>
+                                    <a href="https://drive.google.com/uc?export=download&id=1v3p4C4M8PZrJLovjXV7DrTP4jcxp-wyL"
+                                        class="btn download-btn">
+                                        <i class="fas fa-download"></i> Download
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="book-item">
+                                <h3>Perry's Chemical Engineers Handbook</h3>
+                                <div class="book-links">
+                                    <a href="https://drive.google.com/file/d/1HKNUeuKmYdZCL-BYZgWA60HavhRuWBn4/preview"
+                                        target="_blank" class="btn view-btn">
+                                        <i class="fas fa-eye"></i> View
+                                    </a>
+                                    <a href="https://drive.google.com/uc?export=download&id=1HKNUeuKmYdZCL-BYZgWA60HavhRuWBn4"
+                                        class="btn download-btn">
+                                        <i class="fas fa-download"></i> Download
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="book-item">
+                                <h3>Transport Phenomenon</h3>
+                                <div class="book-links">
+                                    <a href="https://drive.google.com/file/d/1Terj-xwEZPFznejHprcuGCt7ZrbLlklz/preview"
+                                        target="_blank" class="btn view-btn">
+                                        <i class="fas fa-eye"></i> View
+                                    </a>
+                                    <a href="https://drive.google.com/uc?export=download&id=1Terj-xwEZPFznejHprcuGCt7ZrbLlklz"
+                                        class="btn download-btn">
+                                        <i class="fas fa-download"></i> Download
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Semester Material Section -->
+                    <div id="semester-material" class="content-section">
+                        <h2>Semester Wise Material</h2>
+
+                        <div class="semester-grid">
+                            <div class="semester-item">
+                                <h2>First Sem</h2>
+                                <a href="https://drive.google.com/drive/folders/1EVD9f6rW_ik96NSdVetl9mueG97jFgns"
+                                    target="_blank" class="btn folder-btn" rel="nofollow">
+                                    <i class="fas fa-folder-open"></i> Old Curriculum
+                                </a>
+                                <a href="https://drive.google.com/drive/folders/1PG9WwAqeb_8huiIVegd66WehU4MJ7V0r"
+                                    target="_blank" class="btn folder-btn" rel="nofollow">
+                                    <i class="fas fa-folder-open"></i> New Curriculum
+                                </a>
+                            </div>
+
+                            <div class="semester-item">
+                                <h2>Second Sem</h2>
+                                <a href="https://drive.google.com/drive/folders/1RmdSvc2jTAmPGSHW1Ae0dqHrpuiV8zQv"
+                                    target="_blank" class="btn folder-btn" rel="nofollow">
+                                    <i class="fas fa-folder-open"></i> Old Curriculum
+                                </a>
+                                <a href="https://drive.google.com/drive/folders/1eqapi8FnCrvvkilATJJRPCjh5qC60duZ"
+                                    target="_blank" class="btn folder-btn" rel="nofollow">
+                                    <i class="fas fa-folder-open"></i> New Curriculum
+                                </a>
+                            </div>
+
+                            <div class="semester-item">
+                                <h2>Third Sem</h2>
+                                <a href="https://drive.google.com/drive/folders/1iT3zNv9iS3vIimLXM3r8jvU3y8T-lt8T"
+                                    target="_blank" class="btn folder-btn" rel="nofollow">
+                                    <i class="fas fa-folder-open"></i> Old Curriculum
+                                </a>
+                                <a href="https://drive.google.com/drive/folders/13oy5h7VNj4haORojQ_GB5MSQtlg4besZ"
+                                    target="_blank" class="btn folder-btn" rel="nofollow">
+                                    <i class="fas fa-folder-open"></i> New Curriculum
+                                </a>
+                            </div>
+
+                            <div class="semester-item">
+                                <h2>Fourth Sem</h2>
+                                <a href="https://drive.google.com/drive/folders/1zfJqT2ak4h77Yl-UMXjvGDWekyL1x_sg"
+                                    target="_blank" class="btn folder-btn" rel="nofollow">
+                                    <i class="fas fa-folder-open"></i> Old Curriculum
+                                </a>
+                                <a href="https://drive.google.com/drive/folders/1qAbhGKF4pFCDtkeXXx0hLWNhRfnLRS4v"
+                                    target="_blank" class="btn folder-btn" rel="nofollow">
+                                    <i class="fas fa-folder-open"></i> New Curriculum
+                                </a>
+                                <p>New curriculum will be updated soon!</p>
+                            </div>
+
+                            <div class="semester-item">
+                                <h2>Fifth Sem</h2>
+                                <a href="https://drive.google.com/drive/folders/11Ii89daudscfp3K8CzPrC244hSvBYH2q"
+                                    target="_blank" class="btn folder-btn" rel="nofollow">
+                                    <i class="fas fa-folder-open"></i> Old Curriculum
+                                </a>
+                                <a href="https://drive.google.com/drive/folders/11Ii89daudscfp3K8CzPrC244hSvBYH2q"
+                                    target="_blank" class="btn folder-btn" rel="nofollow">
+                                    <i class="fas fa-folder-open"></i> New Curriculum
+                                </a>
+                                <p>New curriculum will be updated soon!</p>
+                            </div>
+
+                            <div class="semester-item">
+                                <h2>Sixth Sem</h2>
+                                <a href="https://drive.google.com/drive/folders/1fbO_No-Xv_hqBjQnaqePIwhYsKmrCzVT"
+                                    target="_blank" class="btn folder-btn" rel="nofollow">
+                                    <i class="fas fa-folder-open"></i> Old Curriculum
+                                </a>
+                                <a href="https://drive.google.com/drive/folders/1fbO_No-Xv_hqBjQnaqePIwhYsKmrCzVT"
+                                    target="_blank" class="btn folder-btn" rel="nofollow">
+                                    <i class="fas fa-folder-open"></i> New Curriculum
+                                </a>
+                                <p>New curriculum will be updated soon!</p>
+                            </div>
+
+                            <div class="semester-item">
+                                <h2>Seventh Sem</h2>
+                                <a href="https://drive.google.com/drive/folders/1dxAjcQLPrG0qbpBHxv7qG7TMLS4e1cXC"
+                                    target="_blank" class="btn folder-btn" rel="nofollow">
+                                    <i class="fas fa-folder-open"></i> Old Curriculum
+                                </a>
+                                <a href="https://drive.google.com/drive/folders/1dxAjcQLPrG0qbpBHxv7qG7TMLS4e1cXC"
+                                    target="_blank" class="btn folder-btn" rel="nofollow">
+                                    <i class="fas fa-folder-open"></i> New Curriculum
+                                </a>
+                                <p>New curriculum will be updated soon!</p>
+                            </div>
+
+                            <div class="semester-item">
+                                <h2>Eighth Sem</h2>
+                                <a href="https://drive.google.com/drive/folders/1A3wtP2BB5BTG5-nei-bOHzK5ROhQ_5Id"
+                                    target="_blank" class="btn folder-btn" rel="nofollow">
+                                    <i class="fas fa-folder-open"></i> Old Curriculum
+                                </a>
+                                <a href="https://drive.google.com/drive/folders/1A3wtP2BB5BTG5-nei-bOHzK5ROhQ_5Id"
+                                    target="_blank" class="btn folder-btn" rel="nofollow">
+                                    <i class="fas fa-folder-open"></i> New Curriculum
+                                </a>
+                                <p>New curriculum will be updated soon!</p>
+                            </div>
+
+                            <div class="semester-item">
+                                <h2>Syllabus</h2>
+                                <a href="#educational-content" class="btn folder-btn" rel="nofollow">
+                                    <i class="fas fa-folder-open"></i> Old Curriculum
+                                </a>
+                                <a href="#educational-content" class="btn folder-btn" rel="nofollow">
+                                    <i class="fas fa-folder-open"></i> New Curriculum
+                                </a>
+                                <p>Syllabus will be updated soon!</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Python Section -->
+                    <div id="python" class="content-section">
+                        <h2>Python In Chemical Engineering</h2>
+
+                        <div class="resource-grid">
+                            <div class="resource-item">
+                                <h3>Python Books</h3>
+                                <a href="https://drive.google.com/drive/folders/1JAjsAsDgxq9bYrJ-1RDsxonDdg770NZ1?usp=sharing"
+                                    target="_blank" class="btn folder-btn">
+                                    <i class="fas fa-folder-open"></i> Open Folder
+                                </a>
+                            </div>
+                            <div class="resource-item">
+                                <h3>Free courses</h3>
+                                <a href="https://drive.google.com/drive/folders/1CgN7DE3pNRNh_4BA_zrrMLqWz6KquwuD?usp=sharing"
+                                    target="_blank" class="btn folder-btn">
+                                    <i class="fas fa-folder-open"></i> Open Folder
+                                </a>
+                            </div>
+
+
+                            <div class="resource-item">
+                                <h3>Python Workshop</h3>
+                                <a href="https://drive.google.com/drive/folders/1ti5e3lslMOH9tMCvz2zwDsc1PgJ17VfR?usp=drive_link"
+                                    target="_blank" class="btn folder-btn">
+                                    <i class="fas fa-folder-open"></i> Open Folder
+                                </a>
+                            </div>
+
+                            <div class="resource-item">
+                                <h3>Python 1 YouTube</h3>
+                                <a href="https://youtu.be/nLRL_NcnK-4?si=8_LLRG-fky_urLpt" target="_blank"
+                                    class="btn youtube-btn">
+                                    <i class="fab fa-youtube"></i> Watch Video
+                                </a>
+                            </div>
+
+                            <div class="resource-item">
+                                <h3>Python 2 YouTube</h3>
+                                <a href="https://youtube.com/playlist?list=PLkdGijFCNuVnGxo-1fSNcdHh5gZc17oRM&si=gTGTdYXIk9tuvTPH"
+                                    target="_blank" class="btn youtube-btn">
+                                    <i class="fab fa-youtube"></i> Watch Playlist
+                                </a>
+                            </div>
+
+                            <div class="resource-item">
+                                <h3>TensorFlow 1</h3>
+                                <a href="https://youtu.be/tpCFfeUEGs8?si=dmt1aNF4zOxdLOzN" target="_blank"
+                                    class="btn youtube-btn">
+                                    <i class="fab fa-youtube"></i> Watch Video
+                                </a>
+                            </div>
+
+                            <div class="resource-item">
+                                <h3>TensorFlow 2</h3>
+                                <a href="https://youtu.be/ZUKz4125WNI?si=Ngt0cLHgjqHPTbl2" target="_blank"
+                                    class="btn youtube-btn">
+                                    <i class="fab fa-youtube"></i> Watch Video
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Aspen Section -->
+                    <div id="aspen" class="content-section">
+                        <h2>Aspen in Chemical Engineering</h2>
+
+                        <div class="resource-grid">
+                            <div class="resource-item">
+                                <h3>Download Aspen Plus and Aspen Hysys</h3>
+                                <a href="https://drive.google.com/drive/folders/1C1MFLmITZAPii0MB2HiIy5GMZO1bYJF3?usp=sharing"
+                                    target="_blank" class="btn folder-btn">
+                                    <i class="fas fa-folder-open"></i> Open Folder
+                                </a>
+                            </div>
+
+                            <div class="resource-item">
+                                <h3>Aspen Book 1</h3>
+                                <a href="https://drive.google.com/file/d/1LpqeZZgpAGKJGDUg_REG0SXTLTdKdcX0/view?usp=sharing"
+                                    target="_blank" class="btn view-btn">
+                                    <i class="fas fa-eye"></i> View
+                                </a>
+                            </div>
+
+                            <div class="resource-item">
+                                <h3>Aspen Book 2</h3>
+                                <a href="https://drive.google.com/file/d/1Y86CKZvgLNmys5WVZO16gyJoOr37A7sd/view?usp=sharing"
+                                    target="_blank" class="btn view-btn">
+                                    <i class="fas fa-eye"></i> View
+                                </a>
+                            </div>
+
+                            <div class="resource-item">
+                                <h3>YouTube Playlist 1</h3>
+                                <a href="https://youtube.com/playlist?list=PLwdnzlV3ogoWmaPmHqavPktjRTvXcZxb7&si=uG4Cr4utOF24NsDM"
+                                    target="_blank" class="btn youtube-btn">
+                                    <i class="fab fa-youtube"></i> Watch Playlist
+                                </a>
+                            </div>
+
+                            <div class="resource-item">
+                                <h3>YouTube Playlist 2</h3>
+                                <a href="https://youtube.com/playlist?list=PLgW2fMtaFzDXaQ9Qd9cjL6wgWeX1lcHRi&si=Iu6-APXTNlk8AIRm"
+                                    target="_blank" class="btn youtube-btn">
+                                    <i class="fab fa-youtube"></i> Watch Playlist
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- MATLAB Section -->
+                    <div id="matlab" class="content-section">
+                        <h2>MATLAB</h2>
+
+                        <div class="resource-grid">
+                            <div class="resource-item">
+                                <h3>Chemical Engineering Computing</h3>
+                                <a href="https://drive.google.com/file/d/1R2ZEjT0LSmeGLsWY0dzk7srHuyMBKwlA/view?usp=sharing"
+                                    target="_blank" class="btn view-btn">
+                                    <i class="fas fa-eye"></i> View
+                                </a>
+                            </div>
+
+                            <div class="resource-item">
+                                <h3>Software For ChemEng</h3>
+                                <a href="https://drive.google.com/file/d/1LwimqmOpwvv2OG43d0DHpmAuIJwSmqF4/view?usp=sharing"
+                                    target="_blank" class="btn view-btn">
+                                    <i class="fas fa-eye"></i> View
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- AutoCAD Section -->
+                    <div id="autocad" class="content-section">
+                        <h2>AutoCAD Plant 3D</h2>
+
+                        <div class="resource-grid">
+                            <div class="resource-item">
+                                <h3>P&ID Concept Book</h3>
+                                <a href="https://drive.google.com/file/d/1uFYTqFHwhaBL5vFqy7IYB0OIQBfivrz4/view?usp=sharing"
+                                    target="_blank" target="_blank" class="btn view-btn">
+                                    <i class="fas fa-eye"></i> View
+                                </a>
+                            </div>
+
+                            <div class="resource-item">
+                                <h3>Introduction Plant 3D Software</h3>
+                                <a href="https://drive.google.com/file/d/1aK08q-CirbByoNE2FsX_b8y56Rmqgfc3/view?usp=sharing"
+                                    target="_blank" class="btn view-btn">
+                                    <i class="fas fa-eye"></i> View
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SolidWorks Section -->
+                    <div id="solidworks" class="content-section">
+                        <h2>SolidWorks</h2>
+
+                        <div class="resource-grid">
+                            <div class="resource-item">
+                                <h3>Coming Soon</h3>
+                                <p>SolidWorks resources will be added soon.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Polymath Section -->
+                    <div id="polymath" class="content-section">
+                        <h2>Polymath</h2>
+
+                        <div class="resource-grid">
+                            <div class="resource-item">
+                                <h3>Coming Soon</h3>
+                                <p>Polymath resources will be added soon.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End of Educational Content Section -->
+    <!-- My Blog Section -->
+    <section id="blogs" class="blog-section-wrapper">
+        <div class="container">
+            <h2 class="section-title">My Thoughts & Articles</h2>
+            <div class="blog-posts-container">
+                <!-- Blog posts will be dynamically inserted here by JavaScript -->
+            </div>
+            <div class="button-container">
+                <!-- Initial text will be replaced by JavaScript -->
+                <button class="toggle-btn" id="toggleBtn">Loading Blogs...</button>
+            </div>
+        </div>
+    </section>
+    <!-- End of My Blog Section -->
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">Contact Me</h2>
+            <div class="contact-content">
+                <div class="social-links">
+                    <h3>Connect With Me</h3>
+                    <div class="social-icons">
+                        <a href="https://www.facebook.com/amritk.com.np" class="social-icon" target="_blank"
+                            rel="noopener noreferrer" aria-label="Facebook">
+                            <i class="fab fa-facebook"></i>
+                        </a>
+                        <a href="https://www.instagram.com/amritk.com.np/" class="social-icon" target="_blank"
+                            rel="noopener noreferrer" aria-label="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://github.com/amritgithub970" class="social-icon" target="_blank"
+                            rel="noopener noreferrer" aria-label="GitHub">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/in/amritk-com-np/" class="social-icon" target="_blank"
+                            rel="noopener noreferrer" aria-label="LinkedIn">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" name="name" placeholder="Your Name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" placeholder="Your Email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Subject</label>
+                            <input type="text" id="subject" name="subject" placeholder="Subject" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" placeholder="Your Message" rows="5"
+                                required></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <h3>Amrit Khanal</h3>
+                    <p>Chemical Engineer | Educator | Content Creator</p>
+                    <p class="footer-message">Thank you for visiting my website. Feel free to connect with me
+                        on social media or contact me directly.</p>
+                    <div class="social-icons">
+                        <a href="https://www.facebook.com/amritk.com.np/" class="social-icon" target="_blank"
+                            rel="noopener noreferrer" aria-label="Facebook">
+                            <i class="fab fa-facebook"></i>
+                        </a>
+                        <a href="https://www.instagram.com/amritk.com.np/" class="social-icon" target="_blank"
+                            rel="noopener noreferrer" aria-label="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://github.com/amritgithub970" class="social-icon" target="_blank"
+                            rel="noopener noreferrer" aria-label="GitHub">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/in/amritk-com-np/" class="social-icon" target="_blank"
+                            rel="noopener noreferrer" aria-label="LinkedIn">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+
+                    </div>
+                </div>
+                <div class="footer-contact">
+                    <h3>Contact <a
+                            href="https://docs.google.com/spreadsheets/d/1Q7oVjL6MIcYUAJieA66j6PT5-b9MBbklW4QUfKK0Tgk/edit?usp=sharing"
+                            target="_blank">In</a>fo</h3>
+                    <p><i class="fas fa-envelope"></i> helloamritkhanal@gmail.com</p>
+                    <a href="mailto:helloamritkhanal@gmail.com" class="btn primary-btn contact-btn">
+                        <i class="fas fa-paper-plane"></i> Send Email
+                    </a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p style="color: white;">© 2025 Amrit Khanal. All Rights Reserved<br>Design & Developed by:
+                    <strong>Amrit
+                        Khanal</strong><br>
+                    Last Updated: May 2025
+                </p>
+            </div>
+        </div>
+        <div class="scroll-top">
+            <a href="#home"><i class="fas fa-arrow-up"></i></a>
+        </div>
+    </footer>
+
+    <!-- Modal for displaying full blog post  -->
+    <div id="blogModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalBlogTitle">Blog Post Title</h3>
+                <span class="close-button">×</span>
+            </div>
+            <div class="modal-body">
+                <iframe id="blogIframe" src="" frameborder="0" allowfullscreen></iframe>
+            </div>
+            <div class="modal-footer">
+                <a id="viewOnBloggerLink" href="#" target="_blank" class="btn modal-btn">View on Blogger</a>
+                <button class="btn modal-btn close-modal-footer-btn">Back to Portfolio</button>
+            </div>
+        </div>
+    </div>
+    <!-- End of Modal -->
+
+    <script src="script.js"></script>
+</body>
+
+</html>
