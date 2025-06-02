@@ -2536,7 +2536,7 @@ footer::before {
   position: absolute;
   width: 40px;
   height: 4px;
-  background-color: black;
+  background-color: darkgreen;
   left: 400px;
   z-index: 4;
 }
@@ -2556,7 +2556,7 @@ footer::before {
   height: 0;
   border-style: solid;
   border-width: 5px 0 5px 8px;
-  border-color: transparent transparent transparent black;
+  border-color: transparent transparent transparent darkgreen;
   z-index: 4;
 }
 
