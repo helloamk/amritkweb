@@ -2648,10 +2648,7 @@ footer::before {
   overflow-wrap: break-word;
   word-break: break-all;
   overflow: hidden;
-  border-right: 2.5px solid #24eb7e;
-  border-left: 2.5px solid #24eb7e;
-  border-top: 2.5px solid #24eb7e;
-  border-bottom: 2.5px solid #24eb7e;
+  border-right: 1.5px solid #0b426b;
   animation: typing 5s steps(50, end) forwards, blink-caret 0.75s step-end infinite;
   text-align: left;
   margin-left: 1px;
