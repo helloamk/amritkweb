@@ -2574,12 +2574,12 @@ footer::before {
   position: absolute;
   right: 15px;
   bottom: 15px;
-  border: 1px solid #888;
+  border: 1px solid var(--border-color);
   padding: 8px 12px;
-  background-color: rgba(255, 255, 255, 0.9);
+  background-color: var(--header-bg);
   z-index: 25;
   border-radius: 5px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow);
 }
 
 .distillation-diagram-container .legend-item {
