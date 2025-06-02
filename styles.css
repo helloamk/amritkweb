@@ -2188,22 +2188,24 @@ footer::before {
   border-radius: 8px;
   margin-left: auto;
   margin-right: auto;
+  background-color: var(--card-bg);
 }
 
 .distillation-diagram-container {
   position: relative;
   width: 700px;
   height: 550px;
-  background-color: white;
+  background-color: var(--main-bg);
   overflow: hidden;
   transform: scale(0.9);
   transform-origin: top left;
+  color: var(--text-color);
 }
 
 .distillation-diagram-container .label {
   position: absolute;
   font-size: 13px;
-  color: black;
+  color: rgb(15, 125, 221)
   white-space: nowrap;
   z-index: 20;
 }
