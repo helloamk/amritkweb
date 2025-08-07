@@ -1255,7 +1255,24 @@ section#about.about .edu-item.skills-item .skills-logo-list li img {
   margin-bottom: 10px;
   text-align: left;
 }
+a.website-btn {
+    background-color: #007bff;
+    /* Bootstrap primary blue */
+    color: white;
+    padding: 10px 16px;
+    margin: 5px 8px 5px 0;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-block;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
 
+a.website-btn:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+    text-decoration: none;
+}
 /* Content Display Area */
 .content-display-area {
   background-color: var(--card-bg);
