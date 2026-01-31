@@ -37,21 +37,11 @@
 
     p { font-size: 1rem; line-height: 1.6; opacity: 0.92; }
 
-    .date {
-      margin-top: 18px;
-      font-size: 0.95rem;
-      color: #ffd479;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-    }
-
     .countdown {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 12px;
-      margin-top: 22px;
+      margin-top: 26px;
     }
 
     .time-box {
@@ -64,7 +54,7 @@
     .time-box small { font-size: 0.7rem; opacity: 0.85; letter-spacing: 0.6px; }
 
     .quote {
-      margin-top: 26px;
+      margin-top: 28px;
       padding: 18px 16px;
       border-left: 3px solid #9be7ff;
       background: rgba(255, 255, 255, 0.06);
@@ -131,8 +121,6 @@
       An open-source project for everyone.
     </p>
 
-    <div class="date">📅 Target Launch: <strong>1 Year From Now</strong></div>
-
     <div class="countdown" id="countdown">
       <div class="time-box"><span id="days">--</span><small>DAYS</small></div>
       <div class="time-box"><span id="hours">--</span><small>HOURS</small></div>
@@ -151,23 +139,27 @@
   </div>
 
   <script>
-    const launchDate = new Date();
-    launchDate.setFullYear(launchDate.getFullYear() + 1);
+    // Fixed countdown target (do NOT display the date anywhere)
+    const targetTime = new Date("2027-01-27T00:00:00Z").getTime();
 
     function updateCountdown() {
-      const now = new Date().getTime();
-      const distance = launchDate - now;
-      if (distance < 0) return;
+      const now = Date.now();
+      const diff = targetTime - now;
 
-      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((distance / (1000 * 60 * 60)) % 24);
-      const minutes = Math.floor((distance / (1000 * 60)) % 60);
-      const seconds = Math.floor((distance / 1000) % 60);
+      if (diff <= 0) {
+        document.getElementById("countdown").innerHTML = "<strong>🚀 We are live!</strong>";
+        return;
+      }
 
-      document.getElementById('days').innerText = days;
-      document.getElementById('hours').innerText = hours;
-      document.getElementById('minutes').innerText = minutes;
-      document.getElementById('seconds').innerText = seconds;
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((diff / (1000 * 60)) % 60);
+      const seconds = Math.floor((diff / 1000) % 60);
+
+      document.getElementById("days").textContent = days;
+      document.getElementById("hours").textContent = hours;
+      document.getElementById("minutes").textContent = minutes;
+      document.getElementById("seconds").textContent = seconds;
     }
 
     updateCountdown();
