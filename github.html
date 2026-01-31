@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Something Big Is Coming</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+
+    body {
+      min-height: 100vh;
+      background: radial-gradient(circle at top, #0f2027, #203a43, #2c5364);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #ffffff;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(14px);
+      border-radius: 22px;
+      padding: 40px 30px 34px;
+      max-width: 460px;
+      width: 100%;
+      box-shadow: 0 25px 45px rgba(0, 0, 0, 0.45);
+      animation: fadeIn 1.2s ease;
+    }
+
+    .github-logo { width: 90px; height: 90px; margin: 0 auto 20px; }
+    .github-logo svg { width: 100%; height: 100%; fill: #ffffff; }
+
+    h1 { font-size: 1.85rem; font-weight: 600; margin-bottom: 12px; }
+
+    p { font-size: 1rem; line-height: 1.6; opacity: 0.92; }
+
+    .date {
+      margin-top: 18px;
+      font-size: 0.95rem;
+      color: #ffd479;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .countdown {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-top: 22px;
+    }
+
+    .time-box {
+      background: rgba(255, 255, 255, 0.14);
+      border-radius: 14px;
+      padding: 12px 6px;
+    }
+
+    .time-box span { display: block; font-size: 1.45rem; font-weight: 600; }
+    .time-box small { font-size: 0.7rem; opacity: 0.85; letter-spacing: 0.6px; }
+
+    .quote {
+      margin-top: 26px;
+      padding: 18px 16px;
+      border-left: 3px solid #9be7ff;
+      background: rgba(255, 255, 255, 0.06);
+      border-radius: 14px;
+      font-size: 0.95rem;
+      line-height: 1.7;
+      font-style: italic;
+      color: #e6f7ff;
+    }
+
+    .quote span {
+      display: block;
+      margin-top: 10px;
+      font-style: normal;
+      font-size: 0.85rem;
+      opacity: 0.8;
+    }
+
+    .actions {
+      margin-top: 26px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .btn {
+      text-decoration: none;
+      padding: 12px 22px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #9be7ff, #6fd1ff);
+      color: #0f2027;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      box-shadow: 0 10px 25px rgba(155, 231, 255, 0.35);
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 30px rgba(155, 231, 255, 0.5);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 480px) {
+      h1 { font-size: 1.55rem; }
+      .card { padding: 30px 22px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="github-logo">
+      <svg viewBox="0 0 16 16" aria-hidden="true">
+        <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z" />
+      </svg>
+    </div>
+
+    <h1>Something Big Is Coming</h1>
+    <p>
+      I’m building something meaningful.<br />
+      An open-source project for everyone.
+    </p>
+
+    <div class="date">📅 Target Launch: <strong>1 Year From Now</strong></div>
+
+    <div class="countdown" id="countdown">
+      <div class="time-box"><span id="days">--</span><small>DAYS</small></div>
+      <div class="time-box"><span id="hours">--</span><small>HOURS</small></div>
+      <div class="time-box"><span id="minutes">--</span><small>MINUTES</small></div>
+      <div class="time-box"><span id="seconds">--</span><small>SECONDS</small></div>
+    </div>
+
+    <div class="quote">
+      “The best way to predict the future is to invent it.”
+      <span>— Alan Kay</span>
+    </div>
+
+    <div class="actions">
+      <a href="https://amritk.com.np" class="btn">← Back to Portfolio</a>
+    </div>
+  </div>
+
+  <script>
+    const launchDate = new Date();
+    launchDate.setFullYear(launchDate.getFullYear() + 1);
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const distance = launchDate - now;
+      if (distance < 0) return;
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((distance / (1000 * 60)) % 60);
+      const seconds = Math.floor((distance / 1000) % 60);
+
+      document.getElementById('days').innerText = days;
+      document.getElementById('hours').innerText = hours;
+      document.getElementById('minutes').innerText = minutes;
+      document.getElementById('seconds').innerText = seconds;
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+  </script>
+</body>
+</html>
