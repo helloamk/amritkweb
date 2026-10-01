@@ -452,171 +452,286 @@ document.addEventListener("DOMContentLoaded", () => {
         setTimeout(typeWriter, 1200);
     };
 
-    // Blog section - UPDATED
+    // Blog section - WordPress version.
+    // TO ADD A NEW POST: copy one {...} block below, paste it at the TOP of the list, and edit the values.
     const initBlogSection = (moreText = "Show More Posts", lessText = "Show Less Posts") => {
         const blogPostsData = [
+
             {
-                id: "blog1",
-                title: "Essential Software for Chemical Engineers",
-                bloggerUrl: "https://eramrit.blogspot.com/2025/05/essential-software-for-chemical.html",
-                previewImage: "https://bit.ly/amritkblog1",
-                snippet: "Check out the best tools for chemical engineers! Use Aspen Plus and HYSYS to test ideas, AutoCAD and SolidWorks to draw designs, MATLAB, Python, and Minitab to study data, and Simulink, LabVIEW, and DeltaV to control processes. These make work easier and smarter! Great for students and experts."
+                id: "blog3",
+                title: "software wordpress",
+                url: "https://amritkhnl.wordpress.com/2026/10/01/essential-software-for-chemical-engineers/", // <- put your WordPress post URL here
+                previewImage: "https://bit.ly/amritkblog2",
+                category: "Career",
+                date: "2025-05-02",
+                snippet: "The history of chemical engineering in Nepal may be short, but its development has been promising. Originating after the Industrial Revolution, this field can significantly contribute to Nepal's pharmaceutical, food processing, cement, environmental protection, and renewable energy sectors."
             },
             {
                 id: "blog2",
                 title: "Chemical Engineering in Nepal: Opportunities and Challenges",
-                bloggerUrl: "https://eramrit.blogspot.com/2025/05/chemical-engineering-in-nepal.html",
+                url: "https://eramrit.blogspot.com/2025/05/chemical-engineering-in-nepal.html", // <- put your WordPress post URL here
                 previewImage: "https://bit.ly/amritkblog2",
+                category: "Career",
+                date: "2025-05-02",
                 snippet: "The history of chemical engineering in Nepal may be short, but its development has been promising. Originating after the Industrial Revolution, this field can significantly contribute to Nepal's pharmaceutical, food processing, cement, environmental protection, and renewable energy sectors."
-            }/* 
-            {
-                id: "blog3",
-                title: "Mastering Remote Work: Tips for Productivity",
-                bloggerUrl: "https://eramritkhanal.blogspot.com/your-remote-work-link-here",
-                previewImage: "Images/blog-placeholder-3.jpg",
-                snippet: "Practical advice and strategies to stay focused, organized, and maintain a healthy work-life balance while working from home effectively."
             },
             {
-                id: "blog4",
-                title: "Essential Software for Chemical Engineers (Copy)",
-                bloggerUrl: "https://eramrit.blogspot.com/2025/05/essential-software-for-chemical.html",
+                id: "blog1",
+                title: "Essential Software for Chemical Engineers",
+                url: "https://eramrit.blogspot.com/2025/05/essential-software-for-chemical.html", // <- put your WordPress post URL here
                 previewImage: "https://bit.ly/amritkblog1",
+                category: "Software",
+                date: "2025-05-01",
                 snippet: "Check out the best tools for chemical engineers! Use Aspen Plus and HYSYS to test ideas, AutoCAD and SolidWorks to draw designs, MATLAB, Python, and Minitab to study data, and Simulink, LabVIEW, and DeltaV to control processes. These make work easier and smarter! Great for students and experts."
-            },
-            {
-                id: "blog5",
-                title: "Chemical Engineering in Nepal (Copy)",
-                bloggerUrl: "https://eramrit.blogspot.com/2025/05/chemical-engineering-in-nepal.html",
-                previewImage: "https://bit.ly/amritkblog2",
-                snippet: "The history of chemical engineering in Nepal may be short, but its development has been promising. Originating after the Industrial Revolution, this field can significantly contribute to Nepal's pharmaceutical, food processing, cement, environmental protection, and renewable energy sectors."
-            },
-            {
-                id: "blog6",
-                title: "Mastering Remote Work (Copy)",
-                bloggerUrl: "https://eramritkhanal.blogspot.com/your-remote-work-link-here",
-                previewImage: "Images/blog-placeholder-3.jpg",
-                snippet: "Practical advice and strategies to stay focused, organized, and maintain a healthy work-life balance while working from home effectively."
-            }*/
+            }
         ];
 
-        const blogPostsContainer = document.querySelector(".blog-posts-container");
-        const blogModal = document.getElementById("blogModal");
-
-        if (!blogPostsContainer) {
-            console.error(".blog-posts-container not found. Blog section will not initialize.");
-            return;
-        }
-
-        const modalBlogTitle = document.getElementById("modalBlogTitle");
-        const blogIframe = document.getElementById("blogIframe");
-        const viewOnBloggerLinkModal = document.getElementById("viewOnBloggerLink");
-        const closeModalButtons = document.querySelectorAll("#blogModal .close-button, #blogModal .close-modal-footer-btn");
-
-        const initialVisibleCount = 3;
-        let visibleCount = initialVisibleCount;
-        let isAllVisible = false;
+        const container = document.querySelector(".blog-posts-container");
+        if (!container) { console.error(".blog-posts-container not found."); return; }
         const toggleBtn = document.querySelector("#toggleBtn");
+        const searchInput = document.getElementById("blogSearch");
+        const catBox = document.getElementById("blogCats");
+        const modal = document.getElementById("blogModal");
+        const mTitle = document.getElementById("modalBlogTitle");
+        const article = document.getElementById("blogArticle");
+        const mLink = document.getElementById("viewOnWordPressLink");
+        const progress = document.getElementById("readProgress");
+        const mBody = modal?.querySelector(".modal-body");
+        const initialVisibleCount = 3;
+        let isAllVisible = false, query = "", category = "All", current = null, currentPost = null;
+        const cache = new Map();
 
-        if (!toggleBtn) {
-            console.warn("Toggle button #toggleBtn not found! Show More/Less functionality will be disabled.");
-        }
+        const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+        const fmtDate = (d) => d ? new Date(d).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" }) : "";
+        const matches = (p) => (category === "All" || p.category === category) &&
+            `${p.title} ${p.snippet} ${p.category || ""}`.toLowerCase().includes(query);
+
+        // ---- SEO: structured data for the blog list ----
+        const ld = document.createElement("script");
+        ld.type = "application/ld+json";
+        ld.textContent = JSON.stringify({
+            "@context": "https://schema.org", "@type": "Blog", name: "Amrit Khanal's Blog", url: location.origin + "/#blogs",
+            blogPost: blogPostsData.map((p) => ({
+                "@type": "BlogPosting", headline: p.title, url: p.url, image: p.previewImage, description: p.snippet,
+                datePublished: p.date, author: { "@type": "Person", name: "Amrit Khanal" }
+            }))
+        });
+        document.head.appendChild(ld);
+
+        // ---- Cards ----
+        const renderCategories = () => {
+            if (!catBox) return;
+            const cats = [...new Set(blogPostsData.map((p) => p.category).filter(Boolean))];
+            catBox.innerHTML = cats.length < 2 ? "" : ["All", ...cats].map((c) =>
+                `<button type="button" class="blog-chip${c === category ? " active" : ""}" data-cat="${esc(c)}">${esc(c)}</button>`).join("");
+        };
 
         const displayBlogPreviews = () => {
-            blogPostsContainer.innerHTML = blogPostsData.length === 0
-                ? '<p style="text-align: center; color: var(--text-light);">No blog posts available yet. Check back soon!</p>'
-                : blogPostsData.slice(0, visibleCount).map(post => `
+            const list = blogPostsData.filter(matches);
+            const shown = isAllVisible ? list : list.slice(0, initialVisibleCount);
+            container.innerHTML = !list.length
+                ? '<p style="text-align:center;color:var(--text-light);grid-column:1/-1;">No posts found.</p>'
+                : shown.map((p) => `
         <article class="blog-post-preview animate-on-scroll">
-          ${post.previewImage ? `<img src="${post.previewImage}" alt="${post.title} preview" class="preview-image">` : ""}
-          <h3>${post.title}</h3>
-          <p class="snippet">${post.snippet}</p>
-          <div class="actions">
-            <button class="btn primary-btn read-more-btn" data-id="${post.id}" aria-label="Read more about ${post.title}">Read More</button>
-            <a href="${post.bloggerUrl}" target="_blank" rel="noopener noreferrer" class="btn secondary-btn view-on-blogger-preview" aria-label="View ${post.title} on Blogger">View on Blogger</a>
+          <div class="preview-media">
+            ${p.previewImage ? `<img src="${esc(p.previewImage)}" alt="${esc(p.title)}" class="preview-image" loading="lazy" width="600" height="200">` : ""}
+            ${p.category ? `<span class="post-badge">${esc(p.category)}</span>` : ""}
           </div>
-        </article>
-      `).join("");
+          <div class="post-meta"><i class="far fa-calendar-alt"></i><time datetime="${esc(p.date)}">${fmtDate(p.date)}</time></div>
+          <h3>${esc(p.title)}</h3>
+          <p class="snippet">${esc(p.snippet)}</p>
+          <div class="actions">
+            <button class="btn primary-btn read-more-btn" data-id="${esc(p.id)}" aria-label="Read ${esc(p.title)} on this site">Read More</button>
+            <a href="${esc(p.url)}" target="_blank" rel="noopener noreferrer" class="btn secondary-btn" aria-label="View ${esc(p.title)} on WordPress">View on WordPress</a>
+          </div>
+        </article>`).join("");
 
-            // Re-apply scroll reveal to newly added blog post previews
-            const scrollRevealInstance = initScrollReveal(); // Get the global observer instance
-            if (scrollRevealInstance && scrollRevealInstance.observer) {
-                document.querySelectorAll(".blog-posts-container .blog-post-preview.animate-on-scroll").forEach((el) => {
-                    scrollRevealInstance.observer.observe(el);
-                });
-            }
-
+            const { observer } = initScrollReveal();
+            container.querySelectorAll(".blog-post-preview").forEach((el) => observer.observe(el));
 
             if (toggleBtn) {
                 toggleBtn.textContent = isAllVisible ? lessText : moreText;
                 toggleBtn.classList.toggle("view-less", isAllVisible);
-
-                if (blogPostsData.length <= initialVisibleCount) {
-                    toggleBtn.style.display = 'none';
-                } else {
-                    toggleBtn.style.display = 'inline-flex';
-                }
+                toggleBtn.style.display = list.length <= initialVisibleCount ? "none" : "inline-flex";
             }
         };
 
-        const openModalWithPost = ({ id, title, bloggerUrl }) => {
-            if (!blogModal || !modalBlogTitle || !blogIframe || !viewOnBloggerLinkModal) {
-                if (bloggerUrl) window.open(bloggerUrl, '_blank'); // Fallback to open in new tab
-                return;
-            }
-            modalBlogTitle.textContent = title;
-            blogIframe.src = bloggerUrl;
-            viewOnBloggerLinkModal.href = bloggerUrl;
-            blogModal.setAttribute("aria-hidden", "false");
+        // ---- Read on this site (article loads inside the popup) ----
+        const wpApi = (url) => {
+            try {
+                const u = new URL(url);
+                return `https://public-api.wordpress.com/rest/v1.1/sites/${u.hostname}/posts/slug:${u.pathname.split("/").filter(Boolean).pop()}`;
+            } catch { return null; }
+        };
+        const clean = (html) => {
+            const doc = new DOMParser().parseFromString(html, "text/html");
+            doc.querySelectorAll("script,style,object,embed,form").forEach((n) => n.remove());
+            doc.querySelectorAll("*").forEach((n) => [...n.attributes].forEach((a) => { if (/^on/i.test(a.name)) n.removeAttribute(a.name); }));
+            doc.querySelectorAll("img").forEach((i) => { i.loading = "lazy"; });
+            doc.querySelectorAll("a[href]").forEach((a) => { a.target = "_blank"; a.rel = "noopener noreferrer"; });
+            return doc.body.innerHTML;
+        };
+        const loadArticle = async (post) => {
+            if (cache.has(post.id)) return cache.get(post.id);
+            const api = wpApi(post.url);
+            if (!api) return null;
+            try {
+                const r = await fetch(api);
+                if (!r.ok) throw new Error(r.status);
+                const html = clean((await r.json()).content || "");
+                if (html) cache.set(post.id, html);
+                return html || null;
+            } catch { return null; }
+        };
+
+        const openModalWithPost = async (post) => {
+            if (!modal || !article) { window.open(post.url, "_blank"); return; }
+            current = post.id;
+            currentPost = post;
+            closeShareMenu();
+            mTitle.textContent = post.title;
+            mLink.href = post.url;
+            article.innerHTML = '<div class="article-skeleton"><span></span><span></span><span></span><span></span></div>';
+            if (mBody) mBody.scrollTop = 0;
+            modal.setAttribute("aria-hidden", "false");
             document.body.classList.add("modal-open");
-            const firstFocusable = blogModal.querySelector(".close-button, a.btn, button.btn, [tabindex]:not([tabindex='-1'])");
-            if (firstFocusable) firstFocusable.focus();
+            history.replaceState(null, "", `#post-${post.id}`);
+            modal.querySelector(".close-button")?.focus();
+
+            const html = await loadArticle(post);
+            if (current !== post.id) return; // closed or switched while loading
+            const mins = html ? Math.max(1, Math.round(html.replace(/<[^>]+>/g, " ").split(/\s+/).filter(Boolean).length / 200)) : 0;
+            article.innerHTML = html
+                ? `<h1 class="article-title">${esc(post.title)}</h1>
+                   <div class="article-meta">${post.category ? `<span class="post-badge static">${esc(post.category)}</span>` : ""}<span><i class="far fa-calendar-alt"></i> ${fmtDate(post.date)}</span><span><i class="far fa-clock"></i> ${mins} min read</span></div>
+                   ${post.previewImage ? `<img class="article-hero" src="${esc(post.previewImage)}" alt="${esc(post.title)}">` : ""}
+                   <div class="article-body">${html}</div>
+                   <div class="article-end"><p>Enjoyed this article? Share it:</p><button type="button" class="btn primary-btn" data-share="copy"><i class="far fa-copy"></i>&nbsp;Copy Link</button></div>`
+                : `<p class="article-note">Showing the original page. If it stays blank, use <strong>View on WordPress</strong> below.</p>
+                   <iframe class="blog-frame" src="${esc(post.url)}" title="${esc(post.title)}"></iframe>`;
         };
 
         const closeBlogModal = () => {
-            if (!blogModal || !blogIframe) return;
-            blogModal.setAttribute("aria-hidden", "true");
+            if (!modal) return;
+            current = null;
+            currentPost = null;
+            closeShareMenu();
+            modal.setAttribute("aria-hidden", "true");
             document.body.classList.remove("modal-open");
-            setTimeout(() => { if (blogIframe) blogIframe.src = "about:blank"; }, 300);
+            history.replaceState(null, "", location.pathname + location.search);
+            setTimeout(() => { if (current === null && article) article.innerHTML = ""; }, 300);
         };
 
-        blogPostsContainer.addEventListener("click", (e) => {
-            const readMoreBtn = e.target.closest(".read-more-btn");
-            if (readMoreBtn) {
-                const postId = readMoreBtn.dataset.id;
-                const postData = blogPostsData.find((p) => p.id === postId);
-                if (postData) openModalWithPost(postData);
+        container.addEventListener("click", (e) => {
+            const btn = e.target.closest(".read-more-btn");
+            if (!btn) return;
+            const post = blogPostsData.find((p) => p.id === btn.dataset.id);
+            if (post) openModalWithPost(post);
+        });
+        if (modal) {
+            modal.querySelectorAll(".close-button, .close-modal-footer-btn").forEach((b) => b.addEventListener("click", closeBlogModal));
+            modal.addEventListener("click", (e) => { if (e.target === modal) closeBlogModal(); });
+            document.addEventListener("keydown", (e) => { if (e.key === "Escape" && modal.getAttribute("aria-hidden") === "false") closeBlogModal(); });
+            mBody?.addEventListener("scroll", () => {
+                if (progress) progress.style.width = (mBody.scrollTop / ((mBody.scrollHeight - mBody.clientHeight) || 1)) * 100 + "%";
+            });
+        }
+
+        // ---- Share (copy link) + text size ----
+        const shareBtn = document.getElementById("shareBtn");
+        const shareMenu = document.getElementById("shareMenu");
+        const toast = document.getElementById("blogToast");
+        let toastTimer;
+        const showToast = (t) => {
+            if (!toast) return;
+            toast.textContent = t;
+            toast.classList.add("show");
+            clearTimeout(toastTimer);
+            toastTimer = setTimeout(() => toast.classList.remove("show"), 2200);
+        };
+        const postLink = () => `${location.href.split("#")[0]}#post-${currentPost.id}`;
+        function closeShareMenu() {
+            if (shareMenu) shareMenu.hidden = true;
+            shareBtn?.setAttribute("aria-expanded", "false");
+        }
+        const copyText = async (text) => {
+            try { await navigator.clipboard.writeText(text); }
+            catch {
+                const ta = document.createElement("textarea");
+                ta.value = text; ta.style.cssText = "position:fixed;opacity:0";
+                document.body.appendChild(ta); ta.select(); document.execCommand("copy"); ta.remove();
             }
+            showToast("Link copied to clipboard");
+        };
+        const refreshShareLinks = () => {
+            if (!currentPost || !shareMenu) return;
+            const u = encodeURIComponent(postLink()), t = encodeURIComponent(currentPost.title);
+            const map = {
+                whatsapp: `https://wa.me/?text=${t}%20${u}`,
+                facebook: `https://www.facebook.com/sharer/sharer.php?u=${u}`,
+                x: `https://twitter.com/intent/tweet?url=${u}&text=${t}`,
+                linkedin: `https://www.linkedin.com/sharing/share-offsite/?url=${u}`
+            };
+            shareMenu.querySelectorAll("a[data-share]").forEach((a) => { a.href = map[a.dataset.share] || "#"; });
+            const nativeBtn = shareMenu.querySelector('[data-share="native"]');
+            if (nativeBtn) nativeBtn.hidden = !navigator.share;
+        };
+        shareBtn?.addEventListener("click", (e) => {
+            e.stopPropagation();
+            refreshShareLinks();
+            shareMenu.hidden = !shareMenu.hidden;
+            shareBtn.setAttribute("aria-expanded", String(!shareMenu.hidden));
+        });
+        modal?.addEventListener("click", (e) => {
+            const item = e.target.closest("[data-share]");
+            if (item && currentPost) {
+                if (item.dataset.share === "copy") copyText(postLink());
+                else if (item.dataset.share === "native") navigator.share({ title: currentPost.title, url: postLink() }).catch(() => { });
+                if (item.tagName !== "A") closeShareMenu();
+            } else if (!e.target.closest(".share-wrap")) closeShareMenu();
+        });
+        document.getElementById("copyLinkFooter")?.addEventListener("click", () => { if (currentPost) copyText(postLink()); });
+        modal?.querySelector(".close-button")?.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") closeBlogModal(); });
+
+        let readSize = 1.1;
+        try { readSize = parseFloat(localStorage.getItem("blogReadSize")) || 1.1; } catch { }
+        const applySize = () => article?.style.setProperty("--read-size", readSize + "rem");
+        const changeSize = (d) => {
+            readSize = Math.min(1.5, Math.max(0.9, +(readSize + d).toFixed(2)));
+            applySize();
+            try { localStorage.setItem("blogReadSize", readSize); } catch { }
+        };
+        document.getElementById("fontUp")?.addEventListener("click", () => changeSize(0.1));
+        document.getElementById("fontDown")?.addEventListener("click", () => changeSize(-0.1));
+        applySize();
+
+        // ---- Search, filter, show more ----
+        toggleBtn?.addEventListener("click", () => {
+            const wasAll = isAllVisible;
+            isAllVisible = !isAllVisible;
+            displayBlogPreviews();
+            if (wasAll) document.getElementById("blogs")?.scrollIntoView({ behavior: "smooth", block: "start" });
+        });
+        searchInput?.addEventListener("input", debounce(() => {
+            query = searchInput.value.trim().toLowerCase();
+            isAllVisible = query !== "";
+            displayBlogPreviews();
+        }, 150));
+        catBox?.addEventListener("click", (e) => {
+            const chip = e.target.closest(".blog-chip");
+            if (!chip) return;
+            category = chip.dataset.cat;
+            isAllVisible = category !== "All";
+            renderCategories();
+            displayBlogPreviews();
         });
 
-        if (blogModal) {
-            closeModalButtons.forEach((btn) => btn.addEventListener("click", closeBlogModal));
-            blogModal.addEventListener("click", (e) => {
-                if (e.target === blogModal) closeBlogModal();
-            });
-            document.addEventListener("keydown", (e) => {
-                if (e.key === "Escape" && blogModal.getAttribute("aria-hidden") === "false") {
-                    closeBlogModal();
-                }
-            });
-        }
-
-        if (toggleBtn) {
-            toggleBtn.addEventListener("click", () => {
-                const wasAllVisible = isAllVisible;
-                isAllVisible = !isAllVisible;
-                visibleCount = isAllVisible ? blogPostsData.length : initialVisibleCount;
-                displayBlogPreviews();
-
-                if (wasAllVisible && !isAllVisible) {
-                    const blogSectionElement = document.getElementById("blogs");
-                    if (blogSectionElement) {
-                        blogSectionElement.scrollIntoView({ behavior: "smooth", block: "start" });
-                    } else if (blogPostsContainer) {
-                        blogPostsContainer.scrollIntoView({ behavior: "smooth", block: "start" });
-                    }
-                }
-            });
-        }
+        renderCategories();
         displayBlogPreviews();
+
+        // Shareable link: yoursite.com/#post-blog1 opens that article directly
+        const m = location.hash.match(/^#post-(.+)$/);
+        if (m) { const p = blogPostsData.find((x) => x.id === m[1]); if (p) openModalWithPost(p); }
     };
 
     const scriptURL = 'https://script.google.com/macros/s/AKfycbzrrvgJcSa_MrmnSaCW4aiwXzuwVpdEjXZSbXQGY8-uKyif71reDBk_G590OMXOFPZ6Rg/exec';
