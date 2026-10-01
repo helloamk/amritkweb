@@ -458,11 +458,11 @@ document.addEventListener("DOMContentLoaded", () => {
         const blogPostsData = [
 
             {
-                id: "blog3",
-                title: "software wordpress",
+                id: "blog1",
+                title: "Essential Software For Chemical Engineer",
                 url: "https://amritkhnl.wordpress.com/2026/10/01/essential-software-for-chemical-engineers/", // <- put your WordPress post URL here
-                previewImage: "https://bit.ly/amritkblog2",
-                category: "Career",
+                previewImage: "https://bit.ly/amritkblog1",
+                category: "Software",
                 date: "2025-05-02",
                 snippet: "The history of chemical engineering in Nepal may be short, but its development has been promising. Originating after the Industrial Revolution, this field can significantly contribute to Nepal's pharmaceutical, food processing, cement, environmental protection, and renewable energy sectors."
             },
@@ -475,15 +475,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 date: "2025-05-02",
                 snippet: "The history of chemical engineering in Nepal may be short, but its development has been promising. Originating after the Industrial Revolution, this field can significantly contribute to Nepal's pharmaceutical, food processing, cement, environmental protection, and renewable energy sectors."
             },
-            {
-                id: "blog1",
-                title: "Essential Software for Chemical Engineers",
-                url: "https://eramrit.blogspot.com/2025/05/essential-software-for-chemical.html", // <- put your WordPress post URL here
-                previewImage: "https://bit.ly/amritkblog1",
-                category: "Software",
-                date: "2025-05-01",
-                snippet: "Check out the best tools for chemical engineers! Use Aspen Plus and HYSYS to test ideas, AutoCAD and SolidWorks to draw designs, MATLAB, Python, and Minitab to study data, and Simulink, LabVIEW, and DeltaV to control processes. These make work easier and smarter! Great for students and experts."
-            }
         ];
 
         const container = document.querySelector(".blog-posts-container");
