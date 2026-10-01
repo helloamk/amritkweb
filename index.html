@@ -354,51 +354,27 @@
                         <div class="edu-item">
                             <span class="edu-icon">🎓</span>
                             <div>
-                                <strong>2020 - 2025</strong>
-                                <p>B.E. Chemical Engineering<br>Pulchowk Campus, IOE, Tribhuvan University</p>
+                                <strong>2021 - 2025</strong>
+                                <p>B.E. Chemical Engineering. <br>Pulchowk Campus, Institute of Engineering, Tribhuvan
+                                    University</p>
                             </div>
                         </div>
-
                         <div class="edu-item">
-                            <span class="edu-icon">⚙️</span>
+                            <span class="edu-icon">📊</span>
                             <div>
-                                <strong>Dec 2025 – Present</strong>
-                                <p>
-                                    <b>Process Engineer</b><br>
-                                    <i>Shivam Cements Limited, Hetauda</i><br><br>
-                                    Operated VRM & Ball Mills ; optimized grinding efficiency, Flow measurement, Heat & mass balance Calculation, Technical &
-                                    RCA reporting.
-                                </p>
+                                <strong>2023</strong>
+                                <p>Research<br>Water Quality Analysis Project, Department of Applied Sciences and
+                                    Chemical Engineering</p>
                             </div>
                         </div>
-
                         <div class="edu-item">
-                            <span class="edu-icon">🛠️</span>
+                            <span class="edu-icon">🤖</span>
                             <div>
-                                <strong>Jul 2026 – Aug 2026</strong>
-                                <p>
-                                    <b>Shutdown Manager</b><br>
-                                    <i>Shivam Cements Limited, Hetauda</i><br><br>
-                                    <i>Promoted to Shutdown Manager<br></i>
-                                    Planned & executed plant shutdown ; coordinated teams, safety, and progress
-                                    reporting.
-                                </p>
+                                <strong>2024</strong>
+                                <p>Machine Learning Project<br>Wastewater Parameter Prediction Using RNN, AI Research
+                                    Lab</p>
                             </div>
                         </div>
-
-                        <div class="edu-item">
-                            <span class="edu-icon">📋</span>
-                            <div>
-                                <strong>Jul 2025 – Nov 2025</strong>
-                                <p>
-                                    <b>Engineer / Technical Writer</b><br>
-                                    <i>Executive Consulting Engineering and Planner, Kathmandu</i><br><br>
-                                    Authored technical reports & proposals; managed bidding, surveys, and KOBO-based
-                                    data collection.
-                                </p>
-                            </div>
-                        </div>
-
                         <div class="edu-item">
                             <span class="edu-icon"><i class="fas fa-briefcase"></i></span>
                             <div>
@@ -406,20 +382,27 @@
                                 <p>Internship<br>Nepal Oil Corporation</p>
                             </div>
                         </div>
-
                         <div class="edu-item">
                             <span class="edu-icon">🔍</span>
                             <div>
                                 <h3>Key Projects</h3>
-                                <p><strong>Water Quality Analysis, Kathmandu Valley</strong><br>Analyzed pH, BOD,
-                                    turbidity for water management policy.</p>
-                                <p><strong>Chemical Risk Mitigation</strong> (2023)<br>Developed safety protocols for
-                                    chemical handling.</p>
-                                <p><strong>ML Project</strong> (2024)<br>RNN model to predict wastewater parameters,
-                                    Guheshwari WWTP.</p>
+                                <p>
+                                    <strong>Water Quality Analysis, Kathmandu Valley</strong>
+                                    <b><i>To: Ministry of Water Supply and Sanitation</i></b><br>
+                                    Analyzed pH, BOD, and turbidity to inform water management policies.
+                                </p>
+                                <p>
+                                    <strong>Chemical Risk Mitigation</strong> (2023)<br>
+                                    <b><i>To: Ministry of Home Affairs</i></b><br>
+                                    Developed safety protocols for chemical handling and emergency response.
+                                </p>
+                                <p>
+                                    <strong>Machine Learning Project</strong> (2024)<br>
+                                    <b><i>Final Year Project</i></b><br>
+                                    Built an RNN model to predict wastewater parameters at Guheshwari WWTP.
+                                </p>
                             </div>
                         </div>
-
                         <div class="edu-item skills-item">
                             <span class="edu-icon">💻</span>
                             <div>
@@ -432,12 +415,14 @@
                                         </li>
                                         <li><img src="Images/latex-logo.png" alt="LaTex" title="LaTex"></li>
                                         <li><img src="Images/machine-learning.png" alt="machine-learning"
-                                                title="Machine Learning"></li>
+                                                title="Machine Learning">
+                                        </li>
                                         <li><img src="Images/aspen-plus-logo.png" alt="Aspen Plus" title="Aspen Plus">
                                         </li>
                                         <li><img src="Images/excel-logo.png" alt="Excel" title="Excel"></li>
                                         <li><img src="Images/autocad-plant-3d.png" alt="AutoCad-Plant-3d"
-                                                title="AutoCad-Plant-3d"></li>
+                                                title="AutoCad-Plant-3d">
+                                        </li>
                                         <li><img src="Images/DWSIM.png" alt="DWSIM" title="DWSIM" width="75"
                                                 height="50"></li>
                                     </ul>
@@ -447,7 +432,6 @@
                     </div>
                 </div>
             </div>
-        </div>
         </div>
         </div>
     </section>
@@ -1139,6 +1123,10 @@
     <section id="blogs" class="blog-section-wrapper">
         <div class="container">
             <h2 class="section-title">My Thoughts & Articles</h2>
+            <div class="blog-toolbar">
+                <input type="search" id="blogSearch" placeholder="Search articles..." aria-label="Search articles">
+                <div id="blogCats" class="blog-cats" role="group" aria-label="Filter by category"></div>
+            </div>
             <div class="blog-posts-container">
                 <!-- Blog posts will be dynamically inserted here by JavaScript -->
             </div>
@@ -1279,20 +1267,48 @@
     <!-- Modal for displaying full blog post  -->
     <div id="blogModal" class="modal">
         <div class="modal-content">
+            <div id="readProgress" class="read-progress"></div>
             <div class="modal-header">
                 <h3 id="modalBlogTitle">Blog Post Title</h3>
-                <span class="close-button">×</span>
+                <div class="modal-tools">
+                    <button type="button" class="tool-btn" id="fontDown" aria-label="Smaller text">A−</button>
+                    <button type="button" class="tool-btn" id="fontUp" aria-label="Larger text">A+</button>
+                    <div class="share-wrap">
+                        <button type="button" class="tool-btn" id="shareBtn" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-share-nodes"></i> <span class="lbl">Share</span>
+                        </button>
+                        <div class="share-menu" id="shareMenu" hidden>
+                            <button type="button" data-share="copy"><i class="far fa-copy"></i> Copy link</button>
+                            <button type="button" data-share="native" hidden><i class="fas fa-share-from-square"></i>
+                                More options...</button>
+                            <a data-share="whatsapp" href="#" target="_blank" rel="noopener noreferrer"><i
+                                    class="fab fa-whatsapp"></i> WhatsApp</a>
+                            <a data-share="facebook" href="#" target="_blank" rel="noopener noreferrer"><i
+                                    class="fab fa-facebook"></i> Facebook</a>
+                            <a data-share="x" href="#" target="_blank" rel="noopener noreferrer"><i
+                                    class="fab fa-twitter"></i> X / Twitter</a>
+                            <a data-share="linkedin" href="#" target="_blank" rel="noopener noreferrer"><i
+                                    class="fab fa-linkedin"></i> LinkedIn</a>
+                        </div>
+                    </div>
+                    <span class="close-button" role="button" tabindex="0" aria-label="Close article">×</span>
+                </div>
             </div>
             <div class="modal-body">
-                <iframe id="blogIframe" src="" frameborder="0" allowfullscreen></iframe>
+                <div id="blogArticle" class="blog-article"></div>
             </div>
             <div class="modal-footer">
-                <a id="viewOnBloggerLink" href="#" target="_blank" class="btn modal-btn">View on Blogger</a>
+                <button type="button" class="btn modal-btn" id="copyLinkFooter"><i class="far fa-copy"></i>&nbsp;Copy
+                    Link</button>
+                <a id="viewOnWordPressLink" href="#" target="_blank" rel="noopener noreferrer"
+                    class="btn modal-btn">View on WordPress</a>
                 <button class="btn modal-btn close-modal-footer-btn">Back to Portfolio</button>
             </div>
         </div>
     </div>
     <!-- End of Modal -->
+
+    <div id="blogToast" class="blog-toast" role="status" aria-live="polite"></div>
 
     <script src="script.js"></script>
 </body>
