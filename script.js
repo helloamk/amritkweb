@@ -469,7 +469,7 @@ document.addEventListener("DOMContentLoaded", () => {
             {
                 id: "blog2",
                 title: "Chemical Engineering in Nepal: Opportunities and Challenges",
-                url: "https://eramrit.blogspot.com/2025/05/chemical-engineering-in-nepal.html", // <- put your WordPress post URL here
+                url: "https://amritkhnl.wordpress.com/2026/10/01/chemical-engineering-in-nepal/", // <- put your WordPress post URL here
                 previewImage: "https://bit.ly/amritkblog2",
                 category: "Career",
                 date: "2025-05-02",
