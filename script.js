@@ -533,7 +533,7 @@ document.addEventListener("DOMContentLoaded", () => {
           <p class="snippet">${esc(p.snippet)}</p>
           <div class="actions">
             <button class="btn primary-btn read-more-btn" data-id="${esc(p.id)}" aria-label="Read ${esc(p.title)} on this site">Read More</button>
-            <a href="${esc(p.url)}" target="_blank" rel="noopener noreferrer" class="btn secondary-btn" aria-label="View ${esc(p.title)} on WordPress">View on WordPress</a>
+            <!-- <a href="${esc(p.url)}" target="_blank" rel="noopener noreferrer" class="btn secondary-btn" aria-label="View ${esc(p.title)} on WordPress">View on WordPress</a> -->
           </div>
         </article>`).join("");
 
