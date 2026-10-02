@@ -685,18 +685,6 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById("copyLinkFooter")?.addEventListener("click", () => { if (currentPost) copyText(postLink()); });
         modal?.querySelector(".close-button")?.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") closeBlogModal(); });
 
-        let readSize = 1.1;
-        try { readSize = parseFloat(localStorage.getItem("blogReadSize")) || 1.1; } catch { }
-        const applySize = () => article?.style.setProperty("--read-size", readSize + "rem");
-        const changeSize = (d) => {
-            readSize = Math.min(1.5, Math.max(0.9, +(readSize + d).toFixed(2)));
-            applySize();
-            try { localStorage.setItem("blogReadSize", readSize); } catch { }
-        };
-        document.getElementById("fontUp")?.addEventListener("click", () => changeSize(0.1));
-        document.getElementById("fontDown")?.addEventListener("click", () => changeSize(-0.1));
-        applySize();
-
         // ---- Search, filter, show more ----
         toggleBtn?.addEventListener("click", () => {
             const wasAll = isAllVisible;
