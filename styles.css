@@ -3489,10 +3489,6 @@ body.modal-open {
   max-height: 460px;
 }
 
-.article-body {
-  font-size: var(--read-size, 1.1rem);
-}
-
 .article-meta {
   flex-wrap: wrap;
 }
@@ -3623,11 +3619,6 @@ body.modal-open {
 @media (max-width: 600px) {
   .tool-btn .lbl {
     display: none;
-  }
-
-  #fontDown,
-  #fontUp {
-    padding: 7px 10px;
   }
 
   #blogModal .modal-header h3 {
