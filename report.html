@@ -374,4 +374,20 @@ syncBsDate();
 document.getElementById("genBtn").addEventListener("click", generateReport);
 document.getElementById("copyBtn").addEventListener("click", copyReport);
 document.getElementById("form").addEventListener("input", e => {
-  if (e.target.tagName === 
+  if (e.target.tagName === "TEXTAREA") autosize(e.target);
+  if (e.target.id === "date") syncBsDate();
+  generateReport();
+});
+document.getElementById("form").addEventListener("change", e => {
+  const k = e.target.dataset && e.target.dataset.opt;
+  if (k) {
+    const g = document.getElementById("grp_" + k);
+    g.hidden = !e.target.checked;
+    g.querySelectorAll("textarea").forEach(autosize);
+  }
+  generateReport();
+});
+generateReport();
+</script>
+</body>
+</html>
