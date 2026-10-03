@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Daily Cement Production Report</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;padding:15px;background:#f2f4f7;color:#202938;font-family:Arial,sans-serif}
+.container{max-width:850px;margin:auto}
+h1{text-align:center;font-size:23px;margin:10px 0 5px}
+h3{font-size:14px;margin:16px 0 8px;color:#374151}
+.subtitle{text-align:center;color:#667085;font-size:13px;margin:0 0 22px}
+.credit{text-align:center;font-size:13px;color:#374151;line-height:1.6;margin:-12px 0 20px}
+.credit a{color:#1d4ed8}
+.section{background:#fff;padding:16px;margin-bottom:15px;border-radius:10px;border:1px solid #e1e5eb}
+.section h2{font-size:17px;margin:0 0 14px;padding-bottom:9px;border-bottom:1px solid #e5e7eb}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.field{min-width:0}
+.field.wide{grid-column:1/-1}
+label{display:block;font-size:12px;color:#555f6d;margin-bottom:5px}
+input{width:100%;min-width:0;padding:10px;border:1px solid #cbd2dc;border-radius:6px;font-size:15px;background:#fff}
+textarea.fld{display:block;width:100%;padding:10px;border:1px solid #cbd2dc;border-radius:6px;font-size:15px;font-family:inherit;line-height:1.4;min-height:42px;resize:vertical;overflow:hidden;background:#fff}
+textarea.fld:focus{outline:2px solid #2563eb33;border-color:#2563eb}
+textarea.fld::placeholder{color:#b3bac6;opacity:1}
+input:focus{outline:2px solid #2563eb33;border-color:#2563eb}
+input.bad{border-color:#dc2626;background:#fef2f2}
+input[readonly]{background:#eef2ff;border-color:#c7d2fe;font-weight:bold;color:#1e3a8a}
+input::placeholder{color:#b3bac6;opacity:1}
+[hidden]{display:none!important}
+input[type=checkbox]{width:18px;height:18px;padding:0;margin:0;flex:none}
+.opt{display:flex;align-items:center;gap:9px;font-size:14px;font-weight:bold;color:#202938;margin:18px 0 10px;cursor:pointer}
+.optgrp{margin-bottom:4px}
+button{width:100%;padding:13px;border:none;border-radius:7px;font-size:15px;font-weight:bold;cursor:pointer;margin-bottom:10px}
+button:active{opacity:.8}
+.generate{background:#1d4ed8;color:#fff}
+.copy{background:#15803d;color:#fff}
+.report-title{font-size:17px;font-weight:bold;margin:20px 0 10px}
+#warn{background:#fef2f2;border:1px solid #fecaca;color:#991b1b;border-radius:8px;padding:10px 12px;font-size:13px;margin-bottom:10px}
+#warn:empty{display:none}
+#report{width:100%;min-height:450px;padding:14px;border:1px solid #cbd2dc;border-radius:8px;background:#fff;font-family:Arial,sans-serif;font-size:14px;line-height:1.55;overflow-wrap:anywhere}
+.note{font-size:12px;color:#667085;margin-top:12px;line-height:1.5}
+#status{text-align:center;font-size:13px;color:#15803d;min-height:18px;margin:-2px 0 8px}
+@media(max-width:480px){body{padding:10px}.grid{gap:10px}.section{padding:13px}input,textarea.fld{font-size:14px;padding:9px}}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>Daily Production Report</h1>
+<p class="subtitle">Cement Plant | Production &amp; Dispatch</p>
+<p class="credit"><strong>App prepared by Amrit khanal</strong><br>Visit me: <a href="https://www.amritk.com.np" target="_blank" rel="noopener">www.amritk.com.np</a></p>
+
+<div id="form"></div>
+
+<button class="generate" id="genBtn">Generate Report</button>
+<button class="copy" id="copyBtn">Copy Report for WhatsApp</button>
+<div id="status" role="status"></div>
+
+<div class="report-title">Generated Report</div>
+<div id="warn" role="alert"></div>
+<textarea id="report" readonly placeholder="Your daily report will appear here..."></textarea>
+
+<p class="note">Running Hrs format: HH:MM or HH.MM (e.g. 23:15 or 23.15 = 23 h 15 min).</p>
+</div>
+
+<script>
+// ---------- FORM DEFINITION ----------
+// Field: [id, label, kind, default, placeholder, wide]
+// kind: d=date, h=runtime HH:MM, n=number, t=text. A plain string = sub-heading.
+const FORM = [
+["Report Details", [
+  ["date","Date (AD)","d"],
+  ["bsdate","Date (BS)","t","","e.g. 13.06.2083"]]],
+["1. Crusher Section", [
+  ["c1h","Crusher 1 Running Hrs (HH:MM)","h","24:00"],["c1p","Crusher 1 Production (MT)","n","","0"],
+  ["c2h","Crusher 2 Running Hrs (HH:MM)","h","24:00"],["c2p","Crusher 2 Production (MT)","n","","0"]]],
+["2. Raw Mill (VRM)", [
+  ["vrmh","Running Hrs (HH:MM)","h","24:00"],["vrmp","Production (MT)","n","","0"],
+  ["vrmt","Target TPH","n",169],
+  ["vrmreason","Stoppage Details","x","Nil","",true]]],
+["3. Coal Mill", [
+  ["coalh","Running Hrs (HH:MM)","h","24:00"],["coalp","Production (MT)","n","","0"],
+  ["coalt","Target TPH","n",14.36],["coalreason","Stoppage Details","x","Nil","",true]]],
+["4. Kiln Section", [
+  ["kilnh","Running Hrs (HH:MM)","h","24:00"],["kilnfeed","Kiln Consumption (MT)","n","","3011"],
+  ["surge","Surge Bin (MT)","n"],
+  ["kilnprod","Kiln Production (MT) = (Feed + Surge) ÷ 1.6","c"],["coalpct","Coal Consumption (%) = Coal ÷ Kiln Production × 100","c"],["kilnt","Target Clinker (TPD)","n",1900],
+  ["coalcons","Coal Consumption (MT)","n"],["coalpcttarget","Coal Consumption Target (%)","n",17],
+  ["shc","SHC (kcal/kg clinker)","n"],["shct","SHC Target","n",869],
+  ["fcao","F-CaO Average (%)","n"],["fcaos","F-CaO Samples (e.g. 23/24)","t"],["fcaot","F-CaO Target (%)","n",2],
+  ["c3s","C3S (%)","n"],["c3st","C3S Target (%)","n",40],
+  ["kilnreason","Kiln Stoppage Details","x","Nil","",true],
+  ["#opt","kcomment","Add comment (tick if any)"],
+  ["kcomment_text","Comment on kiln","x","","Write your comment here...",true]]],
+["5. Cement Mill Production", [
+  "CM1 - 43G Concrete",
+  ["cm1a_h","Running Hrs (HH:MM)","h","24:00"],["cm1a_p","Production (MT)","n","","0"],
+  "CM1 - 43G Bulker",
+  ["cm1b_h","Running Hrs (HH:MM)","h","24:00"],["cm1b_p","Production (MT)","n","","0"],["cm1b_t","Target TPH","n",32],
+  "CM1 - 53G Bulker",
+  ["cm1c_h","Running Hrs (HH:MM)","h","24:00"],["cm1c_p","Production (MT)","n","","0"],["cm1c_t","Target TPH","n",25],
+  ["cm1_reason","CM1 Stoppage Details","x","Nil","",true],
+  "RP + CM2 - 43G Concrete",
+  ["rpa_h","Running Hrs (HH:MM)","h","24:00"],["rpa_p","Production (MT)","n","","0"],
+  "RP + CM2 - 43G Bulker",
+  ["rp_h","Running Hrs (HH:MM)","h","24:00"],["rp_p","Production (MT)","n","","0"],["rp_t","Target TPH","n",135],
+  ["rp_reason","RP + CM2 Stoppage Details","x","Nil","",true],
+  ["#opt","rpo","RP (Finish mode) – tick if running today"],
+  ["rpo_h","Running Hrs (HH:MM)","h","24:00"],["rpo_p","Production (MT)","n","","0"],
+  ["rpo_reason","RP Stoppage Details","x","Nil","",true],
+  ["#opt","cm2o","CM2 (Only) – tick if running today"],
+  ["cm2o_h","Running Hrs (HH:MM)","h","24:00"],["cm2o_p","Production (MT)","n","","0"],
+  ["cm2o_reason","CM2 Stoppage Details","x","Nil","",true],
+  "Target",
+  ["cementtarget","Daily Cement Target (MT)","n",2360]]],
+["6. Packing & Dispatch", [
+  ["packer1","Packer 1 Running Hrs (HH:MM)","h","24:00"],["packer2","Packer 2 Running Hrs (HH:MM)","h","24:00"],
+  ["totalbags","Total Bags Dispatched","n"],["bag53","53G Bags Dispatched","n"],
+  ["bag43","43G Bags = Total − 53G","c"],["bagweight","Bag Weight (kg)","n",50],
+  ["bulk43","43G Bulk Dispatch (MT)","n"],["bulk53","53G Bulk Dispatch (MT)","n"]]],
+["7. Silo Stock", [
+  "Raw Mill Silo",
+  ["rawstock","Stock (MT)","n"],["rawcapacity","Capacity (MT)","n",6000],
+  "Cement Silos",
+  ["oldstock","Old Silo Stock (MT)","n"],["oldcapacity","Old Silo Capacity (MT)","n",6000],
+  ["newstock","New Silo Stock (MT)","n"],["newcapacity","New Silo Capacity (MT)","n",6000],
+  ["stock53","53G Silo Stock (MT)","n"],["capacity53","53G Silo Capacity (MT)","n",1000],
+  ["stock43","43G Bulk Silo Stock (MT)","n"],["capacity43","43G Bulk Silo Capacity (MT)","n",100]]]
+];
+
+function buildForm() {
+  const root = document.getElementById("form");
+  const esc = x => String(x).replace(/&/g, "&amp;").replace(/"/g, "&quot;");
+  FORM.forEach(([title, fields]) => {
+    let open = false;                       // inside an optional (tick-box) group?
+    const close = () => { const r = "</div>" + (open ? "</div>" : ""); open = false; return r; };
+    let html = `<h2>${title}</h2><div class="grid">`;
+    fields.forEach(f => {
+      if (typeof f === "string") { html += `${close()}<h3>${f}</h3><div class="grid">`; return; }
+      if (f[0] === "#opt") {
+        html += `${close()}<label class="opt"><input type="checkbox" id="use_${f[1]}" data-opt="${f[1]}"> ${f[2]}</label>` +
+                `<div class="optgrp" id="grp_${f[1]}" hidden><div class="grid">`;
+        open = true; return;
+      }
+      const [id, label, kind, val = "", ph = "", wide] = f;
+      // Placeholder mode (grey, replaced when you type): runtimes and stoppage text. Everything else keeps its real value.
+      const phMode = kind === "h" || kind === "x";
+      const hint = phMode ? (val !== "" ? val : (kind === "h" ? "HH:MM" : ph)) : ph;
+      const value = phMode ? "" : val;
+      const common = `id="${id}" data-kind="${kind}" data-default="${esc(val)}"${phMode ? ' data-ph="1"' : ""} placeholder="${esc(hint)}"`;
+      let control;
+      if (kind === "x") control = `<textarea class="fld" rows="1" inputmode="text" ${common}></textarea>`;
+      else {
+        const type = kind === "d" ? "date" : kind === "n" ? "number" : "text";
+        const extra = kind === "n" ? ' step="any" inputmode="decimal"' : kind === "h" ? ' autocomplete="off" inputmode="decimal"' : "";
+        const ro = kind === "c" ? ' readonly tabindex="-1"' : "";
+        control = `<input type="${type}" ${common} value="${esc(value)}"${extra}${ro}>`;
+      }
+      html += `<div class="field${wide ? " wide" : ""}"><label for="${id}">${label}</label>${control}</div>`;
+    });
+    const sec = document.createElement("div");
+    sec.className = "section";
+    sec.innerHTML = html + close();
+    root.appendChild(sec);
+  });
+}
+
+// ---------- NEPALI (BS) DATE ----------
+// Month lengths for BS 2070-2086 (Baisakh..Chaitra). Year 2070 starts on 14 April 2013 (AD).
+// Works offline. Dates outside 14 Apr 2013 .. 13 Apr 2030 leave the BS box empty for manual entry.
+const BS_FIRST_YEAR = 2070;
+const BS_FIRST_DAY = Date.UTC(2013, 3, 14);
+const BS_MONTHS = [
+  [31,31,31,32,31,31,29,30,30,29,30,30],
+  [31,31,32,31,31,31,30,29,30,29,30,30],
+  [31,32,31,32,31,30,30,29,30,29,30,30],
+  [31,32,31,32,31,30,30,30,29,29,30,31],
+  [31,31,31,32,31,31,30,29,30,29,30,30],
+  [31,31,32,31,31,31,30,29,30,29,30,30],
+  [31,32,31,32,31,30,30,30,29,29,30,30],
+  [31,32,31,32,31,30,30,30,29,30,29,31],
+  [31,31,31,32,31,31,30,29,30,29,30,30],
+  [31,31,32,31,31,31,30,29,30,29,30,30],
+  [31,32,31,32,31,30,30,30,29,29,30,30],
+  [31,32,31,32,31,30,30,30,29,30,29,31],
+  [31,31,32,31,31,31,30,29,30,29,30,30],
+  [31,31,32,31,31,31,30,29,30,29,30,30],
+  [31,32,31,32,31,30,30,30,29,29,30,31],
+  [30,32,31,32,31,30,30,30,29,30,29,31],
+  [31,31,32,31,31,31,30,29,30,29,30,30]
+];
+function adToBs(iso) {
+  const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(iso || "");
+  if (!m) return "";
+  let days = Math.round((Date.UTC(+m[1], +m[2] - 1, +m[3]) - BS_FIRST_DAY) / 86400000);
+  if (days < 0) return "";
+  const p2 = n => String(n).padStart(2, "0");
+  for (let y = 0; y < BS_MONTHS.length; y++) {
+    for (let mo = 0; mo < 12; mo++) {
+      if (days < BS_MONTHS[y][mo]) return `${p2(days + 1)}.${p2(mo + 1)}.${BS_FIRST_YEAR + y}`;
+      days -= BS_MONTHS[y][mo];
+    }
+  }
+  return "";
+}
+function syncBsDate() { document.getElementById("bsdate").value = adToBs(document.getElementById("date").value); }
+
+// ---------- HELPERS ----------
+// Empty box -> use its default (the grey placeholder). Type a value to override it.
+const str = id => { const e = document.getElementById(id); return e.value.trim() || e.dataset.default || ""; };
+const autosize = t => { t.style.height = "auto"; if (t.scrollHeight > 0) t.style.height = t.scrollHeight + "px"; };
+const on = k => document.getElementById("use_" + k).checked;
+const v = id => { const n = parseFloat(str(id)); return Number.isFinite(n) ? n : 0; };
+
+// "23:15" or "23.15" -> 23.25 ; blank -> 0 ; invalid -> NaN
+function parseRuntime(s) {
+  if (!s) return 0;
+  const m = s.match(/^(\d{1,2})(?:[:.,](\d{2}))?$/);
+  if (!m) return NaN;
+  const h = +m[1], mi = +(m[2] || 0);
+  if (mi > 59 || h * 60 + mi > 1440) return NaN;
+  return h + mi / 60;
+}
+const hrs = id => { const x = parseRuntime(str(id)); return Number.isNaN(x) ? 0 : x; };
+const fmt = h => {
+  const t = Math.round(h * 60);
+  return String(Math.floor(t / 60)).padStart(2, "0") + ":" + String(t % 60).padStart(2, "0");
+};
+const rt = id => `${fmt(hrs(id))} hrs (${hrs(id).toFixed(2)} hrs)`;
+const tph = (p, r) => hrs(r) > 0 ? (v(p) / hrs(r)).toFixed(2) : "0.00";
+const pct = (a, b) => b > 0 ? ((a / b) * 100).toFixed(2) : "0.00";
+const silo = (name, s, c) => `${name}: ${v(s)} / ${v(c)} MT (${pct(v(s), v(c))}%)`;
+const mach = (name, h, p, t, extra = []) => [
+  `${name}:`, `Running Hrs: ${rt(h)}`, `Production: ${v(p).toFixed(2)} MT`,
+  `Actual TPH: ${tph(p, h)} MT/hr`, ...(t ? [`Target TPH: ${v(t)} MT/hr`] : []), ...extra, ""
+];
+
+function localDate() {
+  const d = new Date();
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+}
+
+function validate() {
+  const bad = [];
+  document.querySelectorAll('input[data-kind="h"]').forEach(inp => {
+    if (inp.closest("[hidden]")) { inp.classList.remove("bad"); return; }
+    const isBad = Number.isNaN(parseRuntime(inp.value.trim()));
+    inp.classList.toggle("bad", isBad);
+    if (isBad) bad.push(document.querySelector(`label[for="${inp.id}"]`).textContent);
+  });
+  document.getElementById("warn").textContent = bad.length
+    ? "Invalid running hrs (use HH:MM, max 24:00; counted as 0): " + bad.join("; ")
+    : "";
+}
+
+// ---------- REPORT ----------
+const num = x => String(Number(x.toFixed(2)));           // 1962.00 -> "1962", 117.60 -> "117.6"
+const rh = id => { const t = Math.round(hrs(id) * 60); return Math.floor(t / 60) + "." + String(t % 60).padStart(2, "0"); };
+const tphN = (p, h) => hrs(h) > 0 ? v(p) / hrs(h) : 0;
+const nil = id => str(id) || "Nil";
+const sp = x => Math.round(x);
+
+function block(title, h, p) {
+  if (hrs(h) <= 0 && v(p) <= 0) return `${title}\nR/H: Nil\nProd: Nil`;
+  return `${title}\nR/H: ${rh(h)} hrs.\nProd: ${num(v(p))} tons (${num(tphN(p, h))} tph).`;
+}
+const siloLine = (name, s_, c) => `${name}(${v(c)}t)silo: ${v(s_)} MT (${sp(v(c) > 0 ? v(s_) / v(c) * 100 : 0)}%)`;
+
+function generateReport() {
+  validate();
+  const kilnProd = (v("kilnfeed") + v("surge")) / 1.6;
+  const kilnTph = hrs("kilnh") > 0 ? kilnProd / hrs("kilnh") : 0;
+  const coalPct = kilnProd > 0 ? v("coalcons") / kilnProd * 100 : 0;
+  document.getElementById("kilnprod").value = kilnProd.toFixed(2);
+  document.getElementById("coalpct").value = coalPct.toFixed(2);
+  const crusherTotal = v("c1p") + v("c2p");
+  const cementTotal = v("cm1a_p") + v("cm1b_p") + v("cm1c_p") + v("rpa_p") + v("rp_p") +
+    (on("rpo") ? v("rpo_p") : 0) + (on("cm2o") ? v("cm2o_p") : 0);
+  const bags43 = Math.max(0, v("totalbags") - v("bag53"));
+  document.getElementById("bag43").value = bags43;
+  const bagMT = v("totalbags") * v("bagweight") / 1000;
+  const totalDispatch = bagMT + v("bulk43") + v("bulk53");
+  const cementStock = v("oldstock") + v("newstock") + v("stock53") + v("stock43");
+
+  let ad = str("date");
+  if (/^\d{4}-\d{2}-\d{2}$/.test(ad)) ad = ad.split("-").reverse().join(".");
+  const dateLine = `Date: (${ad || "--"}/${str("bsdate") || "--"})`;
+
+  const lines = [
+    dateLine, "",
+    block("Crusher-1:", "c1h", "c1p"), "",
+    block("Crusher-2:", "c2h", "c2p"), "",
+    `Crusher production= ${num(crusherTotal)} tons.`, "",
+    block("VRM", "vrmh", "vrmp").replace("VRM\n", "VRM "), "",
+    `{Target to achieve: (${num(v("vrmt"))} tph.)}`, "",
+    `VRM Stoppage: ${nil("vrmreason")}`, "",
+    block("Coal Mill", "coalh", "coalp").replace("Coal Mill\n", "Coal Mill "), "",
+    `{Target to achieve: (${num(v("coalt"))} tph)}`, "",
+    `Coal Mill Stoppage: ${nil("coalreason")}.`, "",
+    `Kiln R/H: ${rh("kilnh")} hrs.`,
+    `Prod: ${num(kilnProd)} tons. (${num(kilnTph)} tph).`,
+    `(Surge bin material= ${num(v("surge"))} ton)`,
+    `{Target Clinker Prod:${num(v("kilnt"))} tpd.}`, "",
+    `Kiln Stoppage: ${nil("kilnreason")}.`,
+    ...(on("kcomment") && str("kcomment_text") ? [`- ${str("kcomment_text")}`] : []),
+    `Coal Cons: ${num(v("coalcons"))} MT (${coalPct.toFixed(2)}%).`, "",
+    `{Target Coal Cons: (${v("coalpcttarget").toFixed(2)} %)}`, "",
+    `SHC Cons.: ${num(v("shc"))} KCal/Kg CLK.`,
+    `{Target SHC: ${num(v("shct"))} Kcal/Kg CLK}`, "",
+    `F-CaO Average = ${v("fcao").toFixed(2)}%${str("fcaos") ? ` (${str("fcaos")})` : ""}`,
+    `{Target average: F-CaO ≤${num(v("fcaot"))}}`, "",
+    `Average C3S= ${v("c3s").toFixed(2)} %`,
+    `{Target to achieve C3S= (${num(v("c3st"))}%)}`, "",
+    block("CM-1 43 G Concrete", "cm1a_h", "cm1a_p"), "",
+    block("CM-1: 43G Bulker", "cm1b_h", "cm1b_p"), "",
+    `{Target to achieve (${num(v("cm1b_t"))} tph)}`, "",
+    block("CM-1: 53G Bulker.", "cm1c_h", "cm1c_p"), "",
+    `{Target to achieve (${v("cm1c_t").toFixed(2)} tph)}`, "",
+    `CM-1 Stoppage: ${nil("cm1_reason")}`, "",
+    block("RP+CM2: 43G Concrete.", "rpa_h", "rpa_p"), "",
+    block("RP+CM2: 43G Bulker :", "rp_h", "rp_p"), "",
+    `{Target to achieve (${num(v("rp_t"))})}`, "",
+    `RP+CM2 Stoppage: ${nil("rp_reason")}`, "",
+    ...(on("rpo") ? [block("RP (Finish Mode):", "rpo_h", "rpo_p"), "", `RP Stoppage: ${nil("rpo_reason")}`, ""] : []),
+    ...(on("cm2o") ? [block("CM2 (Only):", "cm2o_h", "cm2o_p"), "", `CM2 Stoppage: ${nil("cm2o_reason")}`, ""] : []),
+    `Total Cement Production: ${num(cementTotal)} tons.`, "",
+    `{Target of Total Prod: ${num(v("cementtarget"))} TPD.}`, "",
+    `Packer 1 R/H: ${rh("packer1")} hrs.`,
+    `Packer 2 R/H: ${rh("packer2")} hrs.`, "",
+    `Dispatch: 43 G= ${bags43} Bags.`,
+    `53 G= ${v("bag53")} Bags`,
+    `= ${bagMT.toFixed(2)} Tons.`,
+    "Bulk Loading",
+    `43G= ${v("bulk43").toFixed(2)} tons.`,
+    `53G= ${v("bulk53").toFixed(2)} tons.`,
+    `Total Dispatch: ${totalDispatch.toFixed(2)} tons.`, "",
+    `*Raw Mill silo*: ${v("rawstock")} MT( ${sp(v("rawcapacity") > 0 ? v("rawstock") / v("rawcapacity") * 100 : 0)}%)`, "",
+    "*Cement silo stock* :",
+    siloLine("Old", "oldstock", "oldcapacity"),
+    siloLine("New", "newstock", "newcapacity"),
+    siloLine("53G", "stock53", "capacity53"),
+    siloLine("43G Bulk", "stock43", "capacity43"),
+    `Total cement stock: ${cementStock.toLocaleString("en-IN")} MT.`, "",
+    "With Regards",
+    "Shivam Cement"
+  ];
+  document.getElementById("report").value = lines.join("\n");
+}
+
+// ---------- ACTIONS ----------
+function setStatus(msg) {
+  const el = document.getElementById("status");
+  el.textContent = msg;
+  setTimeout(() => { el.textContent = ""; }, 2500);
+}
+
+async function copyReport() {
+  generateReport();
+  const box = document.getElementById("report");
+  try {
+    await navigator.clipboard.writeText(box.value);
+    setStatus("Report copied.");
+  } catch (e) {
+    box.focus();
+    box.select();
+    setStatus(document.execCommand("copy") ? "Report copied." : "Copy failed. Select the report text and copy it manually.");
+  }
+}
+
+// ---------- INIT ----------
+buildForm();
+document.getElementById("date").value = localDate();
+syncBsDate();
+document.getElementById("genBtn").addEventListener("click", generateReport);
+document.getElementById("copyBtn").addEventListener("click", copyReport);
+document.getElementById("form").addEventListener("input", e => {
+  if (e.target.tagName === 
