@@ -412,6 +412,7 @@ document.getElementById("form").addEventListener("input", e => {
   if (e.target.tagName === "TEXTAREA") autosize(e.target);
   if (e.target.id === "date") syncBsDate();
   generateReport();
+  saveDraft();
 });
 document.getElementById("form").addEventListener("change", e => {
   const k = e.target.dataset && e.target.dataset.opt;
@@ -421,8 +422,10 @@ document.getElementById("form").addEventListener("change", e => {
     g.querySelectorAll("textarea").forEach(autosize);
   }
   generateReport();
+  saveDraft();
 });
 generateReport();
+loadDraft();
 </script>
 </body>
 </html>
