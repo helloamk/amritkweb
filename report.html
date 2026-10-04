@@ -366,6 +366,41 @@ async function copyReport() {
     setStatus(document.execCommand("copy") ? "Report copied." : "Copy failed. Select the report text and copy it manually.");
   }
 }
+// ---------- AUTO-SAVE (kept for 24 hours) ----------
+// Everything you type is saved in this browser. After a refresh it comes back, for up to 24 hours
+// since your last change; after that the form starts fresh.
+const DRAFT_KEY = "shivamCementDailyReport";
+const DRAFT_MAX_AGE = 8 * 60 * 60 * 1000;
+
+function saveDraft() {
+  try {
+    const vals = {}, ticks = {};
+    document.querySelectorAll("#form input, #form textarea").forEach(i => {
+      if (i.type === "checkbox") ticks[i.dataset.opt] = i.checked;
+      else if (i.dataset.kind !== "c") vals[i.id] = i.value;
+    });
+    localStorage.setItem(DRAFT_KEY, JSON.stringify({ t: Date.now(), vals, ticks }));
+  } catch (e) { /* storage blocked: the app still works, just without auto-save */ }
+}
+
+function loadDraft() {
+  try {
+    const raw = localStorage.getItem(DRAFT_KEY);
+    if (!raw) return false;
+    const d = JSON.parse(raw);
+    if (!d || Date.now() - d.t > DRAFT_MAX_AGE) { localStorage.removeItem(DRAFT_KEY); return false; }
+    Object.entries(d.vals || {}).forEach(([id, val]) => {
+      const el = document.getElementById(id);
+      if (el && el.type !== "checkbox") el.value = val;
+    });
+    Object.entries(d.ticks || {}).forEach(([k, on_]) => {
+      const cb = document.getElementById("use_" + k), g = document.getElementById("grp_" + k);
+      if (cb && g) { cb.checked = !!on_; g.hidden = !on_; }
+    });
+    document.querySelectorAll("#form textarea").forEach(autosize);
+    return true;
+  } catch (e) { return false; }
+}
 
 // ---------- INIT ----------
 buildForm();
