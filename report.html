@@ -307,7 +307,7 @@ function generateReport() {
     `{Target Coal Cons: (${v("coalpcttarget").toFixed(2)} %)}`, "",
     `SHC Cons.: ${num(v("shc"))} KCal/Kg CLK.`,
     `{Target SHC: ${num(v("shct"))} Kcal/Kg CLK}`, "",
-    `F-CaO Average = ${v("fcao").toFixed(2)}%${str("fcaos") ? ` (${str("fcaos").split("/")[0].trim()}/24)` : ""}`,
+    `F-CaO Average = ${v("fcao").toFixed(2)}%${str("fcaos") ? ` (${str("fcaos")})` : ""}`,
     `{Target average: F-CaO ≤${num(v("fcaot"))}}`, "",
     `Average C3S= ${v("c3s").toFixed(2)} %`,
     `{Target to achieve C3S= (${num(v("c3st"))}%)}`, "",
