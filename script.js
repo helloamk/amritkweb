@@ -294,20 +294,10 @@ document.addEventListener("DOMContentLoaded", () => {
         window.addEventListener("load", updateActiveLink); // Also run on load
     };
 
+    // Light theme only: ignores system dark mode and any saved preference.
     const initThemeToggle = () => {
-        const themeToggle = document.querySelector(".theme-toggle");
-        const htmlElement = document.documentElement;
-        if (!themeToggle) return;
-
-        const savedTheme = localStorage.getItem("theme") ||
-            (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
-        htmlElement.setAttribute("data-theme", savedTheme);
-
-        themeToggle.addEventListener("click", () => {
-            const newTheme = htmlElement.getAttribute("data-theme") === "light" ? "dark" : "light";
-            htmlElement.setAttribute("data-theme", newTheme);
-            localStorage.setItem("theme", newTheme);
-        });
+        document.documentElement.setAttribute("data-theme", "light");
+        try { localStorage.removeItem("theme"); } catch (e) { }
     };
 
     const initCategoryDisplay = () => {
@@ -458,7 +448,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const blogPostsData = [
 
             {
-                id: "blog1",
+                id: "software-for-chemical-engineer",
                 title: "Essential Software For Chemical Engineer",
                 url: "https://amritkhnl.wordpress.com/2026/10/01/essential-software-for-chemical-engineers/", // <- put your WordPress post URL here
                 previewImage: "https://bit.ly/amritkblog1",
@@ -467,7 +457,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 snippet: "The history of chemical engineering in Nepal may be short, but its development has been promising. Originating after the Industrial Revolution, this field can significantly contribute to Nepal's pharmaceutical, food processing, cement, environmental protection, and renewable energy sectors."
             },
             {
-                id: "blog2",
+                id: "chemical-engineering-in-nepal",
                 title: "Chemical Engineering in Nepal: Opportunities and Challenges",
                 url: "https://amritkhnl.wordpress.com/2026/10/01/chemical-engineering-in-nepal/", // <- put your WordPress post URL here
                 previewImage: "https://bit.ly/amritkblog2",
@@ -523,7 +513,7 @@ document.addEventListener("DOMContentLoaded", () => {
             container.innerHTML = !list.length
                 ? '<p style="text-align:center;color:var(--text-light);grid-column:1/-1;">No posts found.</p>'
                 : shown.map((p) => `
-        <article class="blog-post-preview animate-on-scroll">
+        <article class="blog-post-preview animate-on-scroll" data-id="${esc(p.id)}" tabindex="0" role="link" aria-label="Read ${esc(p.title)}">
           <div class="preview-media">
             ${p.previewImage ? `<img src="${esc(p.previewImage)}" alt="${esc(p.title)}" class="preview-image" loading="lazy" width="600" height="200">` : ""}
             ${p.category ? `<span class="post-badge">${esc(p.category)}</span>` : ""}
@@ -615,9 +605,18 @@ document.addEventListener("DOMContentLoaded", () => {
         };
 
         container.addEventListener("click", (e) => {
-            const btn = e.target.closest(".read-more-btn");
-            if (!btn) return;
-            const post = blogPostsData.find((p) => p.id === btn.dataset.id);
+            if (e.target.closest("a[href]")) return; // let real links work normally
+            const card = e.target.closest(".blog-post-preview");
+            if (!card) return;
+            const post = blogPostsData.find((p) => p.id === card.dataset.id);
+            if (post) openModalWithPost(post);
+        });
+        container.addEventListener("keydown", (e) => {
+            if (e.key !== "Enter" && e.key !== " ") return;
+            const card = e.target.closest(".blog-post-preview");
+            if (!card || e.target !== card) return;
+            e.preventDefault();
+            const post = blogPostsData.find((p) => p.id === card.dataset.id);
             if (post) openModalWithPost(post);
         });
         if (modal) {
